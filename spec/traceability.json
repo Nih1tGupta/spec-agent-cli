@@ -1,0 +1,400 @@
+{
+  "behaviors": {
+    "CLI-001": [
+      {
+        "line": 3,
+        "path": "src/spec_agent/cli.py"
+      },
+      {
+        "line": 6,
+        "path": "tests/test_cli.py"
+      }
+    ],
+    "CLI-002": [
+      {
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      }
+    ],
+    "CLI-003": [
+      {
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "line": 6,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "CLI-004": [
+      {
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "line": 6,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "CLI-005": [
+      {
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "line": 6,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "CLI-006": [
+      {
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "line": 6,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "CLI-007": [
+      {
+        "line": 3,
+        "path": "src/spec_agent/cli.py"
+      },
+      {
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "line": 6,
+        "path": "tests/test_cli.py"
+      },
+      {
+        "line": 6,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "CLI-008": [
+      {
+        "line": 3,
+        "path": "src/spec_agent/cli.py"
+      },
+      {
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "line": 6,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "CLI-009": [
+      {
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "line": 6,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "CLI-010": [
+      {
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "line": 6,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "CLI-011": [
+      {
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "line": 6,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "CLI-012": [
+      {
+        "line": 3,
+        "path": ".github/workflows/publish-pypi.yml"
+      }
+    ],
+    "ELOG-001": [
+      {
+        "line": 4,
+        "path": ".agents/skills/spec-evolution/scripts/record.py"
+      }
+    ],
+    "ELOG-002": [
+      {
+        "line": 4,
+        "path": ".agents/skills/spec-evolution/scripts/record.py"
+      }
+    ],
+    "ELOG-003": [
+      {
+        "line": 4,
+        "path": ".agents/skills/spec-evolution/scripts/record.py"
+      }
+    ],
+    "ELOG-004": [
+      {
+        "line": 4,
+        "path": ".agents/skills/spec-evolution/scripts/record.py"
+      }
+    ],
+    "ELOG-005": [
+      {
+        "line": 4,
+        "path": ".agents/skills/spec-evolution/scripts/timeline.py"
+      }
+    ],
+    "ELOG-006": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "FSP-001": [
+      {
+        "line": 4,
+        "path": ".agents/skills/spec-request-flow/scripts/create_feature.py"
+      },
+      {
+        "line": 9,
+        "path": "tests/test_feature_scaffold.py"
+      }
+    ],
+    "FSP-002": [
+      {
+        "line": 4,
+        "path": ".agents/skills/spec-request-flow/scripts/create_feature.py"
+      },
+      {
+        "line": 9,
+        "path": "tests/test_feature_scaffold.py"
+      }
+    ],
+    "FSP-003": [
+      {
+        "line": 4,
+        "path": ".agents/skills/spec-request-flow/scripts/create_feature.py"
+      },
+      {
+        "line": 9,
+        "path": "tests/test_feature_scaffold.py"
+      }
+    ],
+    "FSP-004": [
+      {
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "FSP-005": [
+      {
+        "line": 9,
+        "path": "tests/test_feature_scaffold.py"
+      }
+    ],
+    "FSP-006": [
+      {
+        "line": 9,
+        "path": "tests/test_feature_scaffold.py"
+      }
+    ],
+    "PSH-001": [
+      {
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "PSH-002": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "PSH-003": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "PSH-004": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "PSH-005": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "PSH-006": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "PSH-007": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "PSH-008": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "PSH-009": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "PSH-010": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "PSH-011": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "PSH-012": [
+      {
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "SA-001": [
+      {
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "SA-002": [
+      {
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "SA-003": [
+      {
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "SA-004": [
+      {
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "SA-005": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "SA-006": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "SA-007": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "SA-008": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "SA-009": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "SA-010": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "SA-011": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "SA-012": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "SA-013": [
+      {
+        "line": 4,
+        "path": ".agents/skills/spec-drift-sync/scripts/check.py"
+      }
+    ],
+    "SA-014": [
+      {
+        "line": 4,
+        "path": ".agents/skills/spec-drift-sync/scripts/check.py"
+      }
+    ],
+    "SA-015": [
+      {
+        "line": 4,
+        "path": ".agents/skills/spec-drift-sync/scripts/check.py"
+      }
+    ],
+    "SA-016": [
+      {
+        "line": 6,
+        "path": "tests/test_skill_workflows.py"
+      }
+    ],
+    "SA-017": [
+      {
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      }
+    ],
+    "SA-018": [
+      {
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      }
+    ],
+    "SA-019": [
+      {
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      }
+    ]
+  },
+  "schema_version": 1,
+  "source": "derived-from-code-backlinks"
+}
