@@ -1,6 +1,6 @@
 """Safely install packaged Spec Agent assets into a repository."""
 
-# spec: CLI-002, CLI-003, CLI-004, CLI-005, CLI-006, CLI-007, CLI-008, CLI-009, CLI-010, CLI-011, SA-017, SA-018, SA-019, TRACE-005
+# spec: CLI-002, CLI-003, CLI-004, CLI-005, CLI-006, CLI-007, CLI-008, CLI-009, CLI-010, CLI-011, SA-017, SA-018, SA-019, SA-024, SA-026, TRACE-005, CCD-001, CCD-002, CCD-003, CCD-004, CCD-005, CCD-006, CCD-007, CCD-009
 
 from __future__ import annotations
 
@@ -40,6 +40,11 @@ EMPTY_TRACEABILITY = json.dumps(
 def load_skill_files() -> dict[str, bytes]:
     """Return every file from the three canonical skill directories."""
     return package_assets.skill_files()
+
+
+def load_claude_skill_files() -> dict[str, bytes]:
+    """Return the deterministic Claude Code compatibility mirror."""
+    return package_assets.claude_skill_files()
 
 
 def render_rules_block(body: str) -> str:
@@ -162,8 +167,17 @@ def check_status(repo_root: Path) -> list[tuple[str, str]]:
         )
         for relative, content in sorted(load_skill_files().items())
     ]
+    rows.extend(
+        (
+            f".claude/skills/{relative}",
+            _managed_file_status(root / ".claude/skills" / relative, content),
+        )
+        for relative, content in sorted(load_claude_skill_files().items())
+    )
     block = render_rules_block(package_assets.rules_text())
     rows.append(("AGENTS.md", _rules_status(root / "AGENTS.md", block)))
+    claude_block = render_rules_block(package_assets.claude_rules_text())
+    rows.append(("CLAUDE.md", _rules_status(root / "CLAUDE.md", claude_block)))
     rows.extend(_scaffold_items(root))
     return rows
 
@@ -179,8 +193,19 @@ def install(repo_root: Path, *, force: bool = False) -> list[tuple[str, str]]:
         )
         for relative, content in sorted(load_skill_files().items())
     ]
+    rows.extend(
+        (
+            f".claude/skills/{relative}",
+            _apply_managed_file(
+                root / ".claude/skills" / relative, content, force
+            ),
+        )
+        for relative, content in sorted(load_claude_skill_files().items())
+    )
     block = render_rules_block(package_assets.rules_text())
     rows.append(("AGENTS.md", _apply_rules(root / "AGENTS.md", block)))
+    claude_block = render_rules_block(package_assets.claude_rules_text())
+    rows.append(("CLAUDE.md", _apply_rules(root / "CLAUDE.md", claude_block)))
     rows.extend(
         [
             ("SPEC.md", _create_file(root / "SPEC.md", package_assets.project_spec_template())),

@@ -280,6 +280,29 @@ DRAFT-001: Product behavior is still being decided.
 
         self.assertTrue(clean.clean, clean.issues)
 
+    def test_consumer_repo_ignores_backlinks_inside_both_installed_skill_trees(self) -> None:
+        import check as spec_drift
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "SPEC.md").write_text(
+                "---\nstatus: approved\n---\n\nFEATURE-001: Feature works.\n",
+                encoding="utf-8",
+            )
+            for tree in (".agents/skills", ".claude/skills"):
+                skill = root / tree / "example"
+                skill.mkdir(parents=True)
+                (skill / "helper.py").write_text(
+                    "# spec: INTERNAL-001\nvalue = 1\n", encoding="utf-8"
+                )
+
+            report = spec_drift.analyze_repo(root)
+
+        self.assertFalse(
+            any(issue.behavior_id == "INTERNAL-001" for issue in report.issues),
+            report.issues,
+        )
+
     def test_reports_linked_code_changed_since_traceability_baseline(self) -> None:
         import check as spec_drift
 

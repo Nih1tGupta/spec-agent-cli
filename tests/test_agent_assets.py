@@ -1,11 +1,12 @@
 import unittest
 from pathlib import Path
 
-# spec: SA-001, SA-002, SA-003, SA-004, FSP-004, PSH-001, PSH-012
+# spec: SA-001, SA-002, SA-003, SA-004, FSP-004, PSH-001, PSH-012, CCD-001, CCD-002, CCD-003, CCD-004, CCD-008, AC-CCD-001, AC-CCD-002, AC-CCD-003, AC-CCD-006
 
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS_ROOT = ROOT / ".agents/skills"
+CLAUDE_SKILLS_ROOT = ROOT / ".claude/skills"
 
 EXPECTED_SKILLS = {
     "spec-request-flow",
@@ -47,6 +48,30 @@ class AgentArchitectureTests(unittest.TestCase):
             if path.is_dir() and (path / "SKILL.md").is_file()
         }
         self.assertEqual(actual, EXPECTED_SKILLS)
+
+    def test_claude_code_discovers_the_same_three_skills(self) -> None:
+        actual = {
+            path.name
+            for path in CLAUDE_SKILLS_ROOT.iterdir()
+            if path.is_dir() and (path / "SKILL.md").is_file()
+        }
+        self.assertEqual(actual, EXPECTED_SKILLS)
+
+    def test_claude_skill_mirror_matches_canonical_content(self) -> None:
+        canonical = {
+            str(path.relative_to(SKILLS_ROOT)): path.read_bytes()
+            for path in SKILLS_ROOT.rglob("*")
+            if path.is_file()
+        }
+        claude = {
+            str(path.relative_to(CLAUDE_SKILLS_ROOT)): path.read_bytes()
+            for path in CLAUDE_SKILLS_ROOT.rglob("*")
+            if path.is_file()
+        }
+        canonical["spec-request-flow/SKILL.md"] = canonical[
+            "spec-request-flow/SKILL.md"
+        ].replace(b"AGENTS.md", b"CLAUDE.md")
+        self.assertEqual(claude, canonical)
 
     def test_skill_frontmatter_is_minimal_and_trigger_focused(self) -> None:
         for name in sorted(EXPECTED_SKILLS):
@@ -96,6 +121,15 @@ class AgentArchitectureTests(unittest.TestCase):
             self.assertIn(name, text)
         self.assertLessEqual(len(text.split()), 220)
 
+    def test_claude_file_is_an_equivalent_concise_router(self) -> None:
+        agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        claude = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+        self.assertEqual(
+            claude,
+            agents.replace(".agents/skills", ".claude/skills"),
+        )
+        self.assertLessEqual(len(claude.split()), 220)
+
     def test_agents_file_contains_mandatory_code_agent_traceability_contract(self) -> None:
         text = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
         for term in (
@@ -134,10 +168,8 @@ class AgentArchitectureTests(unittest.TestCase):
         self.assertFalse((ROOT / "spec/evolution/events").exists())
         self.assertFalse((SKILLS_ROOT / "spec-evolution/assets/event.md").exists())
 
-    def test_no_parallel_or_obsolete_sources_remain(self) -> None:
+    def test_no_obsolete_sources_remain(self) -> None:
         obsolete = (
-            ROOT / ".claude",
-            ROOT / "CLAUDE.md",
             ROOT / "scripts",
             ROOT / "docs",
             ROOT / "evolution",
@@ -150,7 +182,8 @@ class AgentArchitectureTests(unittest.TestCase):
     def test_discovery_tree_contains_no_generated_cache(self) -> None:
         artifacts = [
             path.relative_to(ROOT)
-            for path in SKILLS_ROOT.rglob("*")
+            for root in (SKILLS_ROOT, CLAUDE_SKILLS_ROOT)
+            for path in root.rglob("*")
             if path.name == "__pycache__" or path.suffix == ".pyc"
         ]
         self.assertEqual(artifacts, [])

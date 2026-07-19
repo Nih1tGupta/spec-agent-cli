@@ -3,7 +3,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-# spec: CLI-001, CLI-007, TRACE-003, TRACE-008, TRACE-012
+# spec: CLI-001, CLI-007, TRACE-003, TRACE-008, TRACE-012, CCD-001, CCD-005
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,6 +21,8 @@ def test_cli_init_and_check(tmp_path: Path) -> None:
     assert main(["init", "--repo", str(tmp_path)]) == 0
     assert main(["init", "--repo", str(tmp_path), "--check"]) == 0
     assert (tmp_path / ".agents/skills/spec-request-flow/SKILL.md").is_file()
+    assert (tmp_path / ".claude/skills/spec-request-flow/SKILL.md").is_file()
+    assert (tmp_path / "CLAUDE.md").is_file()
 
 
 def test_cli_traceability_sync_and_validate_detect_later_code_change(tmp_path: Path) -> None:

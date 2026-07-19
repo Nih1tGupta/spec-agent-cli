@@ -155,6 +155,17 @@
 - Specification delta: Added the Code Agent traceability contract, schema-v2 backlink baselines, changed-code findings, approved-only validation, and CLI validation commands.
 - Supersedes: missing
 
+## 2026-07-19T16:40:31Z — Add Claude Code Skill Discovery
+
+- Event: EV-CLAUDE-CODE-DISCOVERY
+- Task type: architecture-decision
+- User intent: Install the same Spec Agent skills under Claude Code's native project discovery convention without losing open-agent support.
+- Behavior IDs: CCD-001, CCD-002, CCD-003, CCD-004, CCD-005, CCD-006, CCD-007, CCD-008, CCD-009, SA-024, SA-025, SA-026, SA-027
+- Product decision: Install a deterministic Claude Code compatibility mirror and managed Claude router from the canonical open-agent skill source.
+- Rationale: Native discovery lets Claude Code invoke Spec Agent automatically while deterministic generation prevents the two agent surfaces from developing different behavior.
+- Specification delta: Added Claude Code discovery, dual managed routing, mirror equivalence, safe upgrades, and package validation requirements.
+- Supersedes: missing
+
 ## Mermaid
 
 ```mermaid
@@ -174,4 +185,5 @@ timeline
   2026-07-18T20:15:19Z : EV-STRICT-SPEC-AGENT-SEPARATION — Strict Spec Agent Separation
   2026-07-19T05:53:17Z : EV-CLI-DISTRIBUTION-APPROVED — CLI Distribution Approved
   2026-07-19T12:01:39Z : EV-CODE-SPEC-TRACEABILITY-ENFORCED — Enforce Code and Specification Traceability
+  2026-07-19T16:40:31Z : EV-CLAUDE-CODE-DISCOVERY — Add Claude Code Skill Discovery
 ```

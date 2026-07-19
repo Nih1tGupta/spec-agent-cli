@@ -55,7 +55,7 @@ def init_command(
         help="Update locally changed managed skill files.",
     ),
 ) -> None:
-    """Install .agents/skills and scaffold missing specification files."""
+    """Install agent and Claude skills, then scaffold missing specification files."""
     raise typer.Exit(cmd_init(repo, check=check, force=force))
 
 

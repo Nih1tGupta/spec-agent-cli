@@ -1,144 +1,333 @@
 {
-  "baseline_commit": "9a7fa67b3ef5c0c9f19d504930ac06ad7c3a580e",
+  "baseline_commit": "0b7457c4277576ce042cc8aa641c6355b4773bc3",
   "behaviors": {
+    "AC-CCD-001": [
+      {
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "AC-CCD-002": [
+      {
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "AC-CCD-003": [
+      {
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "AC-CCD-004": [
+      {
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
+        "line": 8,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "AC-CCD-005": [
+      {
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
+        "line": 8,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "AC-CCD-006": [
+      {
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "AC-CCD-007": [
+      {
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
+        "line": 8,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "AC-CCD-008": [
+      {
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
+        "line": 8,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "CCD-001": [
+      {
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      },
+      {
+        "file_sha256": "9ae9fec159a225f273f2e397414e2502d733a1c15d3df7c5bbe9ac9415c257b0",
+        "line": 6,
+        "path": "tests/test_cli.py"
+      },
+      {
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
+        "line": 8,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "CCD-002": [
+      {
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "CCD-003": [
+      {
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "file_sha256": "e775f6cf2eedd8263e5c8d7af0371bc557762baba153329d183260e36b11227d",
+        "line": 10,
+        "path": "src/spec_agent/package_assets.py"
+      },
+      {
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "CCD-004": [
+      {
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "file_sha256": "e775f6cf2eedd8263e5c8d7af0371bc557762baba153329d183260e36b11227d",
+        "line": 10,
+        "path": "src/spec_agent/package_assets.py"
+      },
+      {
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "CCD-005": [
+      {
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "file_sha256": "9ae9fec159a225f273f2e397414e2502d733a1c15d3df7c5bbe9ac9415c257b0",
+        "line": 6,
+        "path": "tests/test_cli.py"
+      },
+      {
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
+        "line": 8,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "CCD-006": [
+      {
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
+        "line": 8,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "CCD-007": [
+      {
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
+        "line": 8,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
+    "CCD-008": [
+      {
+        "file_sha256": "e775f6cf2eedd8263e5c8d7af0371bc557762baba153329d183260e36b11227d",
+        "line": 10,
+        "path": "src/spec_agent/package_assets.py"
+      },
+      {
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
+        "line": 4,
+        "path": "tests/test_agent_assets.py"
+      }
+    ],
+    "CCD-009": [
+      {
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      },
+      {
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
+        "line": 8,
+        "path": "tests/test_cli_installer.py"
+      }
+    ],
     "CLI-001": [
       {
-        "file_sha256": "fd65aef02fa137dbbffcdc15e2d952817e792e9467f7071933b735d10ddc70a3",
+        "file_sha256": "f514b243cbf73af53550e2fc11a17d183bae0a0dc0a100140d5cda4664c5bdc2",
         "line": 3,
         "path": "src/spec_agent/cli.py"
       },
       {
-        "file_sha256": "be06ed5c8b9e0ca28d2830d8e525603bb917dd486a491a5373560caa1ef1af49",
+        "file_sha256": "9ae9fec159a225f273f2e397414e2502d733a1c15d3df7c5bbe9ac9415c257b0",
         "line": 6,
         "path": "tests/test_cli.py"
       }
     ],
     "CLI-002": [
       {
-        "file_sha256": "4b1b5458a405f1c70096452a3c6aef52ff46570468863a87149075c985e4a255",
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
         "line": 3,
         "path": "src/spec_agent/installer.py"
       }
     ],
     "CLI-003": [
       {
-        "file_sha256": "4b1b5458a405f1c70096452a3c6aef52ff46570468863a87149075c985e4a255",
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
         "line": 3,
         "path": "src/spec_agent/installer.py"
       },
       {
-        "file_sha256": "d9000d7e711a511f6f712f84e649eb7f110b12afc820885ba582b860a29ff318",
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
         "line": 8,
         "path": "tests/test_cli_installer.py"
       }
     ],
     "CLI-004": [
       {
-        "file_sha256": "4b1b5458a405f1c70096452a3c6aef52ff46570468863a87149075c985e4a255",
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
         "line": 3,
         "path": "src/spec_agent/installer.py"
       },
       {
-        "file_sha256": "d9000d7e711a511f6f712f84e649eb7f110b12afc820885ba582b860a29ff318",
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
         "line": 8,
         "path": "tests/test_cli_installer.py"
       }
     ],
     "CLI-005": [
       {
-        "file_sha256": "4b1b5458a405f1c70096452a3c6aef52ff46570468863a87149075c985e4a255",
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
         "line": 3,
         "path": "src/spec_agent/installer.py"
       },
       {
-        "file_sha256": "d9000d7e711a511f6f712f84e649eb7f110b12afc820885ba582b860a29ff318",
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
         "line": 8,
         "path": "tests/test_cli_installer.py"
       }
     ],
     "CLI-006": [
       {
-        "file_sha256": "4b1b5458a405f1c70096452a3c6aef52ff46570468863a87149075c985e4a255",
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
         "line": 3,
         "path": "src/spec_agent/installer.py"
       },
       {
-        "file_sha256": "d9000d7e711a511f6f712f84e649eb7f110b12afc820885ba582b860a29ff318",
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
         "line": 8,
         "path": "tests/test_cli_installer.py"
       }
     ],
     "CLI-007": [
       {
-        "file_sha256": "fd65aef02fa137dbbffcdc15e2d952817e792e9467f7071933b735d10ddc70a3",
+        "file_sha256": "f514b243cbf73af53550e2fc11a17d183bae0a0dc0a100140d5cda4664c5bdc2",
         "line": 3,
         "path": "src/spec_agent/cli.py"
       },
       {
-        "file_sha256": "4b1b5458a405f1c70096452a3c6aef52ff46570468863a87149075c985e4a255",
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
         "line": 3,
         "path": "src/spec_agent/installer.py"
       },
       {
-        "file_sha256": "be06ed5c8b9e0ca28d2830d8e525603bb917dd486a491a5373560caa1ef1af49",
+        "file_sha256": "9ae9fec159a225f273f2e397414e2502d733a1c15d3df7c5bbe9ac9415c257b0",
         "line": 6,
         "path": "tests/test_cli.py"
       },
       {
-        "file_sha256": "d9000d7e711a511f6f712f84e649eb7f110b12afc820885ba582b860a29ff318",
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
         "line": 8,
         "path": "tests/test_cli_installer.py"
       }
     ],
     "CLI-008": [
       {
-        "file_sha256": "fd65aef02fa137dbbffcdc15e2d952817e792e9467f7071933b735d10ddc70a3",
+        "file_sha256": "f514b243cbf73af53550e2fc11a17d183bae0a0dc0a100140d5cda4664c5bdc2",
         "line": 3,
         "path": "src/spec_agent/cli.py"
       },
       {
-        "file_sha256": "4b1b5458a405f1c70096452a3c6aef52ff46570468863a87149075c985e4a255",
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
         "line": 3,
         "path": "src/spec_agent/installer.py"
       },
       {
-        "file_sha256": "d9000d7e711a511f6f712f84e649eb7f110b12afc820885ba582b860a29ff318",
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
         "line": 8,
         "path": "tests/test_cli_installer.py"
       }
     ],
     "CLI-009": [
       {
-        "file_sha256": "4b1b5458a405f1c70096452a3c6aef52ff46570468863a87149075c985e4a255",
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
         "line": 3,
         "path": "src/spec_agent/installer.py"
       },
       {
-        "file_sha256": "d9000d7e711a511f6f712f84e649eb7f110b12afc820885ba582b860a29ff318",
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
         "line": 8,
         "path": "tests/test_cli_installer.py"
       }
     ],
     "CLI-010": [
       {
-        "file_sha256": "4b1b5458a405f1c70096452a3c6aef52ff46570468863a87149075c985e4a255",
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
         "line": 3,
         "path": "src/spec_agent/installer.py"
       },
       {
-        "file_sha256": "d9000d7e711a511f6f712f84e649eb7f110b12afc820885ba582b860a29ff318",
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
         "line": 8,
         "path": "tests/test_cli_installer.py"
       }
     ],
     "CLI-011": [
       {
-        "file_sha256": "4b1b5458a405f1c70096452a3c6aef52ff46570468863a87149075c985e4a255",
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
         "line": 3,
         "path": "src/spec_agent/installer.py"
       },
       {
-        "file_sha256": "d9000d7e711a511f6f712f84e649eb7f110b12afc820885ba582b860a29ff318",
+        "file_sha256": "217307047fa695945a9d14964a6dbc5c007879738489f96bcd612701abaf2f82",
         "line": 8,
         "path": "tests/test_cli_installer.py"
       }
@@ -155,6 +344,11 @@
         "file_sha256": "d7c38afb80ee120cf115de59f0838e0126373fb0313d15f07193773c781100fb",
         "line": 4,
         "path": ".agents/skills/spec-evolution/scripts/record.py"
+      },
+      {
+        "file_sha256": "d7c38afb80ee120cf115de59f0838e0126373fb0313d15f07193773c781100fb",
+        "line": 4,
+        "path": ".claude/skills/spec-evolution/scripts/record.py"
       }
     ],
     "ELOG-002": [
@@ -162,6 +356,11 @@
         "file_sha256": "d7c38afb80ee120cf115de59f0838e0126373fb0313d15f07193773c781100fb",
         "line": 4,
         "path": ".agents/skills/spec-evolution/scripts/record.py"
+      },
+      {
+        "file_sha256": "d7c38afb80ee120cf115de59f0838e0126373fb0313d15f07193773c781100fb",
+        "line": 4,
+        "path": ".claude/skills/spec-evolution/scripts/record.py"
       }
     ],
     "ELOG-003": [
@@ -169,6 +368,11 @@
         "file_sha256": "d7c38afb80ee120cf115de59f0838e0126373fb0313d15f07193773c781100fb",
         "line": 4,
         "path": ".agents/skills/spec-evolution/scripts/record.py"
+      },
+      {
+        "file_sha256": "d7c38afb80ee120cf115de59f0838e0126373fb0313d15f07193773c781100fb",
+        "line": 4,
+        "path": ".claude/skills/spec-evolution/scripts/record.py"
       }
     ],
     "ELOG-004": [
@@ -176,6 +380,11 @@
         "file_sha256": "d7c38afb80ee120cf115de59f0838e0126373fb0313d15f07193773c781100fb",
         "line": 4,
         "path": ".agents/skills/spec-evolution/scripts/record.py"
+      },
+      {
+        "file_sha256": "d7c38afb80ee120cf115de59f0838e0126373fb0313d15f07193773c781100fb",
+        "line": 4,
+        "path": ".claude/skills/spec-evolution/scripts/record.py"
       }
     ],
     "ELOG-005": [
@@ -183,6 +392,11 @@
         "file_sha256": "343989b2ad88a1b369d6d3c450cf0bc29f76e3c353ec17f1606c1c854c715705",
         "line": 4,
         "path": ".agents/skills/spec-evolution/scripts/timeline.py"
+      },
+      {
+        "file_sha256": "343989b2ad88a1b369d6d3c450cf0bc29f76e3c353ec17f1606c1c854c715705",
+        "line": 4,
+        "path": ".claude/skills/spec-evolution/scripts/timeline.py"
       }
     ],
     "ELOG-006": [
@@ -199,6 +413,11 @@
         "path": ".agents/skills/spec-request-flow/scripts/create_feature.py"
       },
       {
+        "file_sha256": "db3b07fb821d4cc9e3828586428a579e1a6664f4eba0cfd320dce1fa5edeac6e",
+        "line": 4,
+        "path": ".claude/skills/spec-request-flow/scripts/create_feature.py"
+      },
+      {
         "file_sha256": "e24e191d8613be648c411812b7d3cdd7df09cc73619d9453b42ce8c55c0b973d",
         "line": 9,
         "path": "tests/test_feature_scaffold.py"
@@ -209,6 +428,11 @@
         "file_sha256": "db3b07fb821d4cc9e3828586428a579e1a6664f4eba0cfd320dce1fa5edeac6e",
         "line": 4,
         "path": ".agents/skills/spec-request-flow/scripts/create_feature.py"
+      },
+      {
+        "file_sha256": "db3b07fb821d4cc9e3828586428a579e1a6664f4eba0cfd320dce1fa5edeac6e",
+        "line": 4,
+        "path": ".claude/skills/spec-request-flow/scripts/create_feature.py"
       },
       {
         "file_sha256": "e24e191d8613be648c411812b7d3cdd7df09cc73619d9453b42ce8c55c0b973d",
@@ -223,6 +447,11 @@
         "path": ".agents/skills/spec-request-flow/scripts/create_feature.py"
       },
       {
+        "file_sha256": "db3b07fb821d4cc9e3828586428a579e1a6664f4eba0cfd320dce1fa5edeac6e",
+        "line": 4,
+        "path": ".claude/skills/spec-request-flow/scripts/create_feature.py"
+      },
+      {
         "file_sha256": "e24e191d8613be648c411812b7d3cdd7df09cc73619d9453b42ce8c55c0b973d",
         "line": 9,
         "path": "tests/test_feature_scaffold.py"
@@ -230,7 +459,7 @@
     ],
     "FSP-004": [
       {
-        "file_sha256": "336d3c99c5cb36a0defd426ab7d49c37cd644efde1cb130401e35b7119cbe3b4",
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
         "line": 4,
         "path": "tests/test_agent_assets.py"
       }
@@ -251,7 +480,7 @@
     ],
     "PSH-001": [
       {
-        "file_sha256": "336d3c99c5cb36a0defd426ab7d49c37cd644efde1cb130401e35b7119cbe3b4",
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
         "line": 4,
         "path": "tests/test_agent_assets.py"
       }
@@ -328,35 +557,35 @@
     ],
     "PSH-012": [
       {
-        "file_sha256": "336d3c99c5cb36a0defd426ab7d49c37cd644efde1cb130401e35b7119cbe3b4",
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
         "line": 4,
         "path": "tests/test_agent_assets.py"
       }
     ],
     "SA-001": [
       {
-        "file_sha256": "336d3c99c5cb36a0defd426ab7d49c37cd644efde1cb130401e35b7119cbe3b4",
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
         "line": 4,
         "path": "tests/test_agent_assets.py"
       }
     ],
     "SA-002": [
       {
-        "file_sha256": "336d3c99c5cb36a0defd426ab7d49c37cd644efde1cb130401e35b7119cbe3b4",
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
         "line": 4,
         "path": "tests/test_agent_assets.py"
       }
     ],
     "SA-003": [
       {
-        "file_sha256": "336d3c99c5cb36a0defd426ab7d49c37cd644efde1cb130401e35b7119cbe3b4",
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
         "line": 4,
         "path": "tests/test_agent_assets.py"
       }
     ],
     "SA-004": [
       {
-        "file_sha256": "336d3c99c5cb36a0defd426ab7d49c37cd644efde1cb130401e35b7119cbe3b4",
+        "file_sha256": "961e65283723d54147029cc484d3f13223dbbfcf642bf3612489c8c36c3b6c41",
         "line": 4,
         "path": "tests/test_agent_assets.py"
       }
@@ -419,23 +648,38 @@
     ],
     "SA-013": [
       {
-        "file_sha256": "5b7313fd96a7a5ee12e5d7cce80cb99106bbb24342a901164fee3231b2167284",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
         "line": 4,
         "path": ".agents/skills/spec-drift-sync/scripts/check.py"
+      },
+      {
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
+        "line": 4,
+        "path": ".claude/skills/spec-drift-sync/scripts/check.py"
       }
     ],
     "SA-014": [
       {
-        "file_sha256": "5b7313fd96a7a5ee12e5d7cce80cb99106bbb24342a901164fee3231b2167284",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
         "line": 4,
         "path": ".agents/skills/spec-drift-sync/scripts/check.py"
+      },
+      {
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
+        "line": 4,
+        "path": ".claude/skills/spec-drift-sync/scripts/check.py"
       }
     ],
     "SA-015": [
       {
-        "file_sha256": "5b7313fd96a7a5ee12e5d7cce80cb99106bbb24342a901164fee3231b2167284",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
         "line": 4,
         "path": ".agents/skills/spec-drift-sync/scripts/check.py"
+      },
+      {
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
+        "line": 4,
+        "path": ".claude/skills/spec-drift-sync/scripts/check.py"
       }
     ],
     "SA-016": [
@@ -447,21 +691,21 @@
     ],
     "SA-017": [
       {
-        "file_sha256": "4b1b5458a405f1c70096452a3c6aef52ff46570468863a87149075c985e4a255",
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
         "line": 3,
         "path": "src/spec_agent/installer.py"
       }
     ],
     "SA-018": [
       {
-        "file_sha256": "4b1b5458a405f1c70096452a3c6aef52ff46570468863a87149075c985e4a255",
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
         "line": 3,
         "path": "src/spec_agent/installer.py"
       }
     ],
     "SA-019": [
       {
-        "file_sha256": "4b1b5458a405f1c70096452a3c6aef52ff46570468863a87149075c985e4a255",
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
         "line": 3,
         "path": "src/spec_agent/installer.py"
       }
@@ -480,21 +724,31 @@
     ],
     "SA-021": [
       {
-        "file_sha256": "5b7313fd96a7a5ee12e5d7cce80cb99106bbb24342a901164fee3231b2167284",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
         "line": 4,
         "path": ".agents/skills/spec-drift-sync/scripts/check.py"
       },
       {
-        "file_sha256": "6d5d2a1d3102b01a2650ffef2e608019895cff9a3d781cb85292185d5c29e498",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
+        "line": 4,
+        "path": ".claude/skills/spec-drift-sync/scripts/check.py"
+      },
+      {
+        "file_sha256": "dcb61b52fa66a7283a8657235a30fbb2d6eafbe074a06eb744deea4b557b7c86",
         "line": 10,
         "path": "tests/test_spec_drift.py"
       }
     ],
     "SA-022": [
       {
-        "file_sha256": "5b7313fd96a7a5ee12e5d7cce80cb99106bbb24342a901164fee3231b2167284",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
         "line": 4,
         "path": ".agents/skills/spec-drift-sync/scripts/check.py"
+      },
+      {
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
+        "line": 4,
+        "path": ".claude/skills/spec-drift-sync/scripts/check.py"
       },
       {
         "file_sha256": "2b98e812fd49d27df0bc5ec631737c6245a141dc3753ab477539caa665516384",
@@ -502,21 +756,54 @@
         "path": "src/spec_agent/commands/traceability.py"
       },
       {
-        "file_sha256": "6d5d2a1d3102b01a2650ffef2e608019895cff9a3d781cb85292185d5c29e498",
+        "file_sha256": "dcb61b52fa66a7283a8657235a30fbb2d6eafbe074a06eb744deea4b557b7c86",
         "line": 10,
         "path": "tests/test_spec_drift.py"
       }
     ],
     "SA-023": [
       {
-        "file_sha256": "5b7313fd96a7a5ee12e5d7cce80cb99106bbb24342a901164fee3231b2167284",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
         "line": 4,
         "path": ".agents/skills/spec-drift-sync/scripts/check.py"
       },
       {
-        "file_sha256": "6d5d2a1d3102b01a2650ffef2e608019895cff9a3d781cb85292185d5c29e498",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
+        "line": 4,
+        "path": ".claude/skills/spec-drift-sync/scripts/check.py"
+      },
+      {
+        "file_sha256": "dcb61b52fa66a7283a8657235a30fbb2d6eafbe074a06eb744deea4b557b7c86",
         "line": 10,
         "path": "tests/test_spec_drift.py"
+      }
+    ],
+    "SA-024": [
+      {
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      }
+    ],
+    "SA-025": [
+      {
+        "file_sha256": "e775f6cf2eedd8263e5c8d7af0371bc557762baba153329d183260e36b11227d",
+        "line": 10,
+        "path": "src/spec_agent/package_assets.py"
+      }
+    ],
+    "SA-026": [
+      {
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
+        "line": 3,
+        "path": "src/spec_agent/installer.py"
+      }
+    ],
+    "SA-027": [
+      {
+        "file_sha256": "e775f6cf2eedd8263e5c8d7af0371bc557762baba153329d183260e36b11227d",
+        "line": 10,
+        "path": "src/spec_agent/package_assets.py"
       }
     ],
     "TRACE-001": [
@@ -524,6 +811,11 @@
         "file_sha256": "db3b07fb821d4cc9e3828586428a579e1a6664f4eba0cfd320dce1fa5edeac6e",
         "line": 4,
         "path": ".agents/skills/spec-request-flow/scripts/create_feature.py"
+      },
+      {
+        "file_sha256": "db3b07fb821d4cc9e3828586428a579e1a6664f4eba0cfd320dce1fa5edeac6e",
+        "line": 4,
+        "path": ".claude/skills/spec-request-flow/scripts/create_feature.py"
       }
     ],
     "TRACE-002": [
@@ -540,7 +832,7 @@
         "path": "src/spec_agent/commands/traceability.py"
       },
       {
-        "file_sha256": "be06ed5c8b9e0ca28d2830d8e525603bb917dd486a491a5373560caa1ef1af49",
+        "file_sha256": "9ae9fec159a225f273f2e397414e2502d733a1c15d3df7c5bbe9ac9415c257b0",
         "line": 6,
         "path": "tests/test_cli.py"
       },
@@ -552,62 +844,87 @@
     ],
     "TRACE-004": [
       {
-        "file_sha256": "5b7313fd96a7a5ee12e5d7cce80cb99106bbb24342a901164fee3231b2167284",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
         "line": 4,
         "path": ".agents/skills/spec-drift-sync/scripts/check.py"
       },
       {
-        "file_sha256": "6d5d2a1d3102b01a2650ffef2e608019895cff9a3d781cb85292185d5c29e498",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
+        "line": 4,
+        "path": ".claude/skills/spec-drift-sync/scripts/check.py"
+      },
+      {
+        "file_sha256": "dcb61b52fa66a7283a8657235a30fbb2d6eafbe074a06eb744deea4b557b7c86",
         "line": 10,
         "path": "tests/test_spec_drift.py"
       }
     ],
     "TRACE-005": [
       {
-        "file_sha256": "5b7313fd96a7a5ee12e5d7cce80cb99106bbb24342a901164fee3231b2167284",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
         "line": 4,
         "path": ".agents/skills/spec-drift-sync/scripts/check.py"
       },
       {
-        "file_sha256": "4b1b5458a405f1c70096452a3c6aef52ff46570468863a87149075c985e4a255",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
+        "line": 4,
+        "path": ".claude/skills/spec-drift-sync/scripts/check.py"
+      },
+      {
+        "file_sha256": "1cdb1efd4b01956cb84f951bc0c041e5ddc54d5a0352583a8de53b801debb5b7",
         "line": 3,
         "path": "src/spec_agent/installer.py"
       },
       {
-        "file_sha256": "6d5d2a1d3102b01a2650ffef2e608019895cff9a3d781cb85292185d5c29e498",
+        "file_sha256": "dcb61b52fa66a7283a8657235a30fbb2d6eafbe074a06eb744deea4b557b7c86",
         "line": 10,
         "path": "tests/test_spec_drift.py"
       }
     ],
     "TRACE-006": [
       {
-        "file_sha256": "5b7313fd96a7a5ee12e5d7cce80cb99106bbb24342a901164fee3231b2167284",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
         "line": 4,
         "path": ".agents/skills/spec-drift-sync/scripts/check.py"
       },
       {
-        "file_sha256": "6d5d2a1d3102b01a2650ffef2e608019895cff9a3d781cb85292185d5c29e498",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
+        "line": 4,
+        "path": ".claude/skills/spec-drift-sync/scripts/check.py"
+      },
+      {
+        "file_sha256": "dcb61b52fa66a7283a8657235a30fbb2d6eafbe074a06eb744deea4b557b7c86",
         "line": 10,
         "path": "tests/test_spec_drift.py"
       }
     ],
     "TRACE-007": [
       {
-        "file_sha256": "5b7313fd96a7a5ee12e5d7cce80cb99106bbb24342a901164fee3231b2167284",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
         "line": 4,
         "path": ".agents/skills/spec-drift-sync/scripts/check.py"
       },
       {
-        "file_sha256": "6d5d2a1d3102b01a2650ffef2e608019895cff9a3d781cb85292185d5c29e498",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
+        "line": 4,
+        "path": ".claude/skills/spec-drift-sync/scripts/check.py"
+      },
+      {
+        "file_sha256": "dcb61b52fa66a7283a8657235a30fbb2d6eafbe074a06eb744deea4b557b7c86",
         "line": 10,
         "path": "tests/test_spec_drift.py"
       }
     ],
     "TRACE-008": [
       {
-        "file_sha256": "5b7313fd96a7a5ee12e5d7cce80cb99106bbb24342a901164fee3231b2167284",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
         "line": 4,
         "path": ".agents/skills/spec-drift-sync/scripts/check.py"
+      },
+      {
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
+        "line": 4,
+        "path": ".claude/skills/spec-drift-sync/scripts/check.py"
       },
       {
         "file_sha256": "2b98e812fd49d27df0bc5ec631737c6245a141dc3753ab477539caa665516384",
@@ -615,21 +932,26 @@
         "path": "src/spec_agent/commands/traceability.py"
       },
       {
-        "file_sha256": "be06ed5c8b9e0ca28d2830d8e525603bb917dd486a491a5373560caa1ef1af49",
+        "file_sha256": "9ae9fec159a225f273f2e397414e2502d733a1c15d3df7c5bbe9ac9415c257b0",
         "line": 6,
         "path": "tests/test_cli.py"
       },
       {
-        "file_sha256": "6d5d2a1d3102b01a2650ffef2e608019895cff9a3d781cb85292185d5c29e498",
+        "file_sha256": "dcb61b52fa66a7283a8657235a30fbb2d6eafbe074a06eb744deea4b557b7c86",
         "line": 10,
         "path": "tests/test_spec_drift.py"
       }
     ],
     "TRACE-009": [
       {
-        "file_sha256": "5b7313fd96a7a5ee12e5d7cce80cb99106bbb24342a901164fee3231b2167284",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
         "line": 4,
         "path": ".agents/skills/spec-drift-sync/scripts/check.py"
+      },
+      {
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
+        "line": 4,
+        "path": ".claude/skills/spec-drift-sync/scripts/check.py"
       },
       {
         "file_sha256": "2b98e812fd49d27df0bc5ec631737c6245a141dc3753ab477539caa665516384",
@@ -642,7 +964,7 @@
         "path": "tests/test_skill_workflows.py"
       },
       {
-        "file_sha256": "6d5d2a1d3102b01a2650ffef2e608019895cff9a3d781cb85292185d5c29e498",
+        "file_sha256": "dcb61b52fa66a7283a8657235a30fbb2d6eafbe074a06eb744deea4b557b7c86",
         "line": 10,
         "path": "tests/test_spec_drift.py"
       }
@@ -656,9 +978,14 @@
     ],
     "TRACE-011": [
       {
-        "file_sha256": "5b7313fd96a7a5ee12e5d7cce80cb99106bbb24342a901164fee3231b2167284",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
         "line": 4,
         "path": ".agents/skills/spec-drift-sync/scripts/check.py"
+      },
+      {
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
+        "line": 4,
+        "path": ".claude/skills/spec-drift-sync/scripts/check.py"
       },
       {
         "file_sha256": "9ea4c61fe44b8aaa845c8ee08ca41cbbca2c8f2c7d3fdb0f17567415bc9dae8f",
@@ -666,16 +993,21 @@
         "path": "tests/test_skill_workflows.py"
       },
       {
-        "file_sha256": "6d5d2a1d3102b01a2650ffef2e608019895cff9a3d781cb85292185d5c29e498",
+        "file_sha256": "dcb61b52fa66a7283a8657235a30fbb2d6eafbe074a06eb744deea4b557b7c86",
         "line": 10,
         "path": "tests/test_spec_drift.py"
       }
     ],
     "TRACE-012": [
       {
-        "file_sha256": "5b7313fd96a7a5ee12e5d7cce80cb99106bbb24342a901164fee3231b2167284",
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
         "line": 4,
         "path": ".agents/skills/spec-drift-sync/scripts/check.py"
+      },
+      {
+        "file_sha256": "cb5d083306f5b1d4f4553dc7f783d960301dfa367d506a7e2133c0639febed28",
+        "line": 4,
+        "path": ".claude/skills/spec-drift-sync/scripts/check.py"
       },
       {
         "file_sha256": "2b98e812fd49d27df0bc5ec631737c6245a141dc3753ab477539caa665516384",
@@ -683,7 +1015,7 @@
         "path": "src/spec_agent/commands/traceability.py"
       },
       {
-        "file_sha256": "be06ed5c8b9e0ca28d2830d8e525603bb917dd486a491a5373560caa1ef1af49",
+        "file_sha256": "9ae9fec159a225f273f2e397414e2502d733a1c15d3df7c5bbe9ac9415c257b0",
         "line": 6,
         "path": "tests/test_cli.py"
       }

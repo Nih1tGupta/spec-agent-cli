@@ -18,20 +18,20 @@ updates, safety, and release readiness.
 - AC-CLI-001: Given a clean supported Python environment, when the built distribution
   is installed, then `spec-agent --version` reports its installed version.
 - AC-CLI-002: Given only package installation, no repository file is created or edited.
-- AC-CLI-003: Given a fresh target, initialization installs every canonical skill file
-  and all required project scaffolding.
-- AC-CLI-004: Given existing content in `AGENTS.md`, initialization preserves that
-  content and adds exactly one managed rules block.
+- AC-CLI-003: Given a fresh target, initialization installs every canonical skill file,
+  its Claude Code compatibility mirror, and all required project scaffolding.
+- AC-CLI-004: Given existing content in either supported project instruction file,
+  initialization preserves that content and adds exactly one managed rules block.
 - AC-CLI-005: Given existing project-owned artifacts, normal and forced initialization
   preserve their content byte for byte.
 - AC-CLI-006: Given a current installation, a second initialization produces no file
   content changes.
 - AC-CLI-007: Given a missing or outdated managed asset, check mode returns failure and
   leaves the target byte for byte unchanged.
-- AC-CLI-008: Given an outdated skill, normal initialization preserves it and forced
-  initialization restores the packaged copy.
-- AC-CLI-009: Given damaged managed markers, initialization reports failure and leaves
-  the complete rules file unchanged.
+- AC-CLI-008: Given an outdated skill in either discovery tree, normal initialization
+  preserves it and forced initialization restores its generated packaged content.
+- AC-CLI-009: Given damaged managed markers in either project instruction file,
+  initialization reports failure and leaves the complete file unchanged.
 - AC-CLI-010: Given a built wheel, its embedded skill resources match every authored
   canonical skill file and contain no generated cache files.
 - AC-CLI-011: Given a freshly initialized target, its project scaffolding contains no
@@ -47,7 +47,7 @@ fail CI before publication.
 
 ## Edge cases
 
-- Existing empty and non-empty `AGENTS.md` files both receive one block.
+- Existing empty and non-empty project instruction files both receive one block.
 - Existing specification content is preserved even when force is requested.
 - Nested skill files are installed recursively.
 - Empty evolution history remains a valid single JSONL source.

@@ -37,14 +37,15 @@ publish a release without an explicit maintainer action.
 
 Use a Python distribution named `spec-agent-cli` with the `spec-agent` command. Follow
 Provenance's explicit installation model: package installation adds only the command;
-`spec-agent init` performs repository changes. Install only the open `.agents/skills`
-standard rather than creating parallel skill trees.
+`spec-agent init` performs repository changes. Install the canonical open-agent skills
+and a deterministic Claude Code compatibility mirror from the same packaged source.
 
 ## Conceptual data model
 
 An installed distribution contains versioned managed assets. A target repository owns
-one managed rules block, one installed skill tree, a root product index, feature
-packets, an append-only evolution log, a generated timeline, and derived traceability.
+two agent-specific managed rules blocks, a canonical skill tree and deterministic
+Claude Code mirror, a root product index, feature packets, an append-only evolution
+log, a generated timeline, and derived traceability.
 
 ## Business rules
 
@@ -54,27 +55,29 @@ CLI-001: The product MUST be installable as `spec-agent-cli` and expose the
 CLI-002: Installing or upgrading the distribution MUST NOT modify a target repository.
 
 CLI-003: `spec-agent init` MUST install all files belonging to the three canonical
-skills, including their templates, references, and scripts.
+skills and their Claude Code compatibility mirror, including templates, references,
+and scripts.
 
-CLI-004: Initialization MUST add a managed Spec Agent block to `AGENTS.md` while
-preserving all user content outside that block.
+CLI-004: Initialization MUST add managed Spec Agent blocks to both supported project
+instruction files while preserving all user content outside those blocks.
 
 CLI-005: Initialization MUST create only missing project-owned artifacts and MUST NOT
 replace existing specifications, evolution history, timelines, or traceability data.
 
 CLI-006: Repeated initialization with the same version MUST be idempotent.
 
-CLI-007: `spec-agent init --check` MUST report missing or outdated managed assets,
-write nothing, and return a failing status when action is required.
+CLI-007: `spec-agent init --check` MUST report missing or outdated assets across both
+discovery surfaces, write nothing, and return a failing status when action is required.
 
-CLI-008: `spec-agent init --force` MAY replace locally changed managed skill files but
-MUST NOT replace project-owned artifacts.
+CLI-008: `spec-agent init --force` MAY replace locally changed managed skill files in
+both discovery trees but MUST NOT replace project-owned artifacts.
 
-CLI-009: Initialization MUST refuse to rewrite an `AGENTS.md` file whose managed
-markers are missing, repeated, reversed, or unbalanced.
+CLI-009: Initialization MUST refuse to rewrite either project instruction file when
+its managed markers are missing, repeated, reversed, or unbalanced.
 
 CLI-010: The authored `.agents/skills` directory MUST remain the single source of
-truth; build tooling MAY embed those same files into a distribution artifact.
+truth; build tooling MUST deterministically derive Claude Code compatibility files
+from those canonical files.
 
 CLI-011: The initialized repository MUST contain the root product index, a feature
 packet directory, one append-only evolution log, one generated timeline, and one
@@ -86,8 +89,8 @@ Trusted Publishing without storing a long-lived PyPI password in the repository.
 ## Preconditions and postconditions
 
 Before initialization, the maintainer selects a writable repository. After successful
-initialization, compatible agents can discover the installed skills and the read-only
-check reports the installation as current.
+initialization, compatible agents and Claude Code can discover the installed skills,
+and the read-only check reports both discovery surfaces as current.
 
 ## Primary user flows
 

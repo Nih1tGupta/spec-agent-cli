@@ -1,9 +1,10 @@
 # Spec Agent CLI
 
 Spec Agent turns unclear feature requests into approved, product-only specifications
-before any implementation planning begins. It installs three Agent Skills under the
-open `.agents/skills` convention and keeps specification evolution and code drift
-observation available without mixing them into implementation work.
+before any implementation planning begins. It installs the same three Agent Skills
+for both the open `.agents/skills` convention and Claude Code's `.claude/skills`
+convention. Specification evolution and code drift observation remain available
+without mixing them into implementation work.
 
 ## Install
 
@@ -34,6 +35,10 @@ This creates only missing project files and installs:
 .agents/skills/spec-drift-sync/
 .agents/skills/spec-evolution/
 AGENTS.md                         # managed rules block; user content is preserved
+.claude/skills/spec-request-flow/
+.claude/skills/spec-drift-sync/
+.claude/skills/spec-evolution/
+CLAUDE.md                         # managed Claude rules block; user content is preserved
 SPEC.md                           # created only when absent
 spec/features/
 spec/evolution/events.jsonl
@@ -43,11 +48,13 @@ spec/traceability.json
 
 Use `spec-agent init --check` for a read-only status check. Use
 `spec-agent init --force` to refresh locally modified managed skill files after a CLI
-upgrade. `--force` never replaces project specifications or history.
+upgrade. Both skill trees come from one canonical packaged source, so their behavior
+cannot evolve independently. `--force` never replaces project specifications or
+history.
 
 ## Start a feature
 
-Ask a compatible agent:
+Ask a compatible agent, including Claude Code:
 
 ```text
 Use spec-request-flow to define feature X. Do not implement it.

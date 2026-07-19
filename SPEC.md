@@ -2,7 +2,7 @@
 id: SPEC-AGENT
 title: Strict Spec Agent
 status: approved
-version: 4.1.0
+version: 4.2.0
 ---
 
 # Strict Spec Agent
@@ -17,7 +17,8 @@ hands the approved specification to a separate Code Agent.
 
 - `SPEC.md` owns repository-wide product behavior and indexes every feature packet.
 - Each feature packet contains normative `spec.md` and `acceptance.md` files.
-- `.agents/skills/` is the sole discoverable skill tree.
+- `.agents/skills/` is the canonical authored skill tree.
+- `.claude/skills/` is its deterministic Claude Code compatibility mirror.
 - `spec/evolution/events.jsonl` owns approved product-decision history.
 - `spec/evolution/timeline.md` is a generated view, never a source of truth.
 - `spec/traceability.json` is derived from code backlinks and is never normative.
@@ -29,16 +30,22 @@ hands the approved specification to a separate Code Agent.
 - [Strict skill behavior](spec/features/production-skill-hardening/spec.md) and [acceptance](spec/features/production-skill-hardening/acceptance.md)
 - [CLI distribution](spec/features/cli-distribution/spec.md) and [acceptance](spec/features/cli-distribution/acceptance.md)
 - [Code/spec traceability](spec/features/code-spec-traceability/spec.md) and [acceptance](spec/features/code-spec-traceability/acceptance.md)
+- [Claude Code discovery](spec/features/claude-code-discovery/spec.md) and [acceptance](spec/features/claude-code-discovery/acceptance.md)
 
 ## Product structure
 
 ```text
 spec-agent/
 ├── AGENTS.md
+├── CLAUDE.md
 ├── SPEC.md
 ├── pyproject.toml
 ├── src/spec_agent/
 ├── .agents/skills/
+│   ├── spec-request-flow/
+│   ├── spec-drift-sync/
+│   └── spec-evolution/
+├── .claude/skills/              # generated compatibility mirror
 │   ├── spec-request-flow/
 │   ├── spec-drift-sync/
 │   └── spec-evolution/
@@ -53,9 +60,9 @@ spec-agent/
 └── tests/
 ```
 
-The source `.agents/skills/` tree is embedded into the built distribution and remains
-the only authored copy of each skill. The `spec-agent init` command installs those
-resources into a target repository without copying this package's self-specifications.
+The source `.agents/skills/` tree remains the canonical authored copy. The Claude Code
+tree is generated from it with only discovery-path adaptations. The `spec-agent init`
+command installs both surfaces without copying this package's self-specifications.
 
 ## Agent discovery and boundaries
 
@@ -64,8 +71,8 @@ SA-001: Every responsibility MUST have exactly one owning source.
 SA-002: Every skill MUST be discoverable from minimal `name` and trigger-focused
 `description` frontmatter before its body or resources are loaded.
 
-SA-003: The package MUST maintain one `.agents/skills/` tree and MUST NOT create
-parallel `.claude` or custom skill mirrors.
+SA-003: The package MUST maintain `.agents/skills/` as the canonical authored tree and
+MUST generate an equivalent `.claude/skills/` compatibility mirror for Claude Code.
 
 SA-004: `AGENTS.md` MUST remain a concise router to the root contract and applicable
 skill rather than duplicate complete workflows.
@@ -120,8 +127,9 @@ without storing implementation plans, code deltas, test results, or full prompts
 SA-017: Installing the Python distribution MUST NOT modify a project; repository
 changes occur only through an explicit `spec-agent init` command.
 
-SA-018: Initialization MUST install the complete canonical `.agents/skills` tree,
-merge a managed rules block safely, and scaffold only missing project-owned artifacts.
+SA-018: Initialization MUST install the complete canonical `.agents/skills` tree and
+its Claude Code compatibility mirror, merge managed router blocks safely, and scaffold
+only missing project-owned artifacts.
 
 SA-019: Repeated initialization MUST be safe and idempotent, and forced updates MUST
 remain limited to CLI-managed skill assets.
@@ -142,6 +150,20 @@ human product decision.
 
 SA-023: Traceability refresh MUST establish a new baseline only after an approved
 implementation or reconciliation; it MUST NOT silently make changed code authoritative.
+
+## Claude Code compatibility
+
+SA-024: Initialization MUST make the same three skills discoverable through both the
+open-agent and Claude Code project conventions without requiring another package.
+
+SA-025: Claude-specific resources MAY adapt discovery paths and routing language but
+MUST preserve all workflow gates, product rules, templates, scripts, and outcomes.
+
+SA-026: Both project instruction files MUST preserve user-authored content outside one
+managed Spec Agent block, including across repeated and forced initialization.
+
+SA-027: Package validation MUST detect a missing or semantically divergent Claude Code
+mirror before distribution.
 
 ## Workflow
 
@@ -185,3 +207,5 @@ refresh derived traceability, and route a product decision back through request 
   traceability, and clean read-only validation.
 - AC-SA-009: Modifying a baselined linked code file produces a drift finding until an
   authorized reconciliation establishes a new baseline.
+- AC-SA-010: A clean installation exposes equivalent skills and managed routing to
+  both compatible open agents and Claude Code.

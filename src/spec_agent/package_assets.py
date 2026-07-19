@@ -7,6 +7,12 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 
+# spec: CCD-003, CCD-004, CCD-008, SA-025, SA-027
+CLAUDE_ADAPTATIONS = {
+    "spec-request-flow/SKILL.md": ((b"AGENTS.md", b"CLAUDE.md"),),
+}
+
+
 def _development_root() -> Path:
     return Path(__file__).resolve().parents[2]
 
@@ -27,6 +33,11 @@ def rules_text() -> str:
     if embedded.is_file():
         return embedded.read_text(encoding="utf-8")
     return (_development_root() / "AGENTS.md").read_text(encoding="utf-8")
+
+
+def claude_rules_text() -> str:
+    """Return the canonical router adapted to Claude Code discovery."""
+    return rules_text().replace(".agents/skills", ".claude/skills")
 
 
 def project_spec_template() -> str:
@@ -53,4 +64,15 @@ def skill_files() -> dict[str, bytes]:
                 result[str(relative)] = entry.read_bytes()
 
     visit(skill_root(), PurePosixPath())
+    return result
+
+
+def claude_skill_files() -> dict[str, bytes]:
+    """Generate Claude Code skills from the canonical open-agent tree."""
+    result = skill_files()
+    for relative, replacements in CLAUDE_ADAPTATIONS.items():
+        content = result[relative]
+        for original, replacement in replacements:
+            content = content.replace(original, replacement)
+        result[relative] = content
     return result
