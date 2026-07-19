@@ -1,6 +1,6 @@
 """Safely install packaged Spec Agent assets into a repository."""
 
-# spec: CLI-002, CLI-003, CLI-004, CLI-005, CLI-006, CLI-007, CLI-008, CLI-009, CLI-010, CLI-011, SA-017, SA-018, SA-019
+# spec: CLI-002, CLI-003, CLI-004, CLI-005, CLI-006, CLI-007, CLI-008, CLI-009, CLI-010, CLI-011, SA-017, SA-018, SA-019, TRACE-005
 
 from __future__ import annotations
 
@@ -28,7 +28,8 @@ timeline
 EMPTY_TRACEABILITY = json.dumps(
     {
         "behaviors": {},
-        "schema_version": 1,
+        "baseline_commit": None,
+        "schema_version": 2,
         "source": "derived-from-code-backlinks",
     },
     indent=2,

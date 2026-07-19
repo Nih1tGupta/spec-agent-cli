@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 import sys
 from pathlib import Path
 
@@ -35,6 +37,11 @@ def test_fresh_init_installs_complete_open_agent_package(tmp_path: Path) -> None
     assert (tmp_path / "spec/evolution/events.jsonl").read_text() == ""
     assert (tmp_path / "spec/evolution/timeline.md").is_file()
     assert (tmp_path / "spec/traceability.json").is_file()
+    traceability = json.loads(
+        (tmp_path / "spec/traceability.json").read_text(encoding="utf-8")
+    )
+    assert traceability["schema_version"] == 2
+    assert traceability["baseline_commit"] is None
 
 
 def test_init_is_idempotent_and_preserves_project_content(tmp_path: Path) -> None:

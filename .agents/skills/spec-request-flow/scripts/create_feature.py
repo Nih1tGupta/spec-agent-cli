@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Create a non-overwriting two-file feature specification packet."""
 
-# spec: FSP-001, FSP-002, FSP-003
+# spec: FSP-001, FSP-002, FSP-003, TRACE-001
 
 from __future__ import annotations
 

@@ -7,6 +7,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
+# spec: SA-021, SA-022, SA-023, TRACE-004, TRACE-005, TRACE-006, TRACE-007, TRACE-008, TRACE-009, TRACE-011
+
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS_DIR = (
@@ -37,12 +39,13 @@ class SpecDriftTests(unittest.TestCase):
             spec_drift.write_traceability(spec_drift.analyze_repo(root), output)
 
             data = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(data["schema_version"], 1)
+            self.assertEqual(data["schema_version"], 2)
             self.assertEqual(data["source"], "derived-from-code-backlinks")
-            self.assertEqual(
-                data["behaviors"]["FEATURE-X-001"],
-                [{"path": "service.py", "line": 1}],
-            )
+            link = data["behaviors"]["FEATURE-X-001"][0]
+            self.assertEqual(link["path"], "service.py")
+            self.assertEqual(link["line"], 1)
+            self.assertRegex(link["file_sha256"], r"^[0-9a-f]{64}$")
+            self.assertIn("baseline_commit", data)
             self.assertEqual(
                 spec_file.read_text(encoding="utf-8"),
                 "FEATURE-X-001: Users can complete Feature X.\n",
@@ -226,6 +229,101 @@ PROCESS-001: Specs describe current intended behavior.
             any(issue.kind == "unlinked" and issue.behavior_id == "PROCESS-001" for issue in report.issues),
             f"Expected no unlinked drift for not_applicable spec, got {report.issues!r}",
         )
+
+    def test_draft_spec_does_not_require_backlinks(self) -> None:
+        import check as spec_drift
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            spec = root / "SPEC.md"
+            spec.write_text(
+                """---
+status: draft
+---
+
+DRAFT-001: Product behavior is still being decided.
+""",
+                encoding="utf-8",
+            )
+
+            report = spec_drift.analyze_repo(root)
+
+        self.assertFalse(
+            any(issue.kind == "unlinked" for issue in report.issues),
+            report.issues,
+        )
+
+    def test_reports_unbaselined_backlink_until_traceability_is_synced(self) -> None:
+        import check as spec_drift
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "spec").mkdir()
+            (root / "SPEC.md").write_text(
+                "---\nstatus: approved\n---\n\nFEATURE-001: Feature works.\n",
+                encoding="utf-8",
+            )
+            (root / "service.py").write_text(
+                "# spec: FEATURE-001\nvalue = 1\n", encoding="utf-8"
+            )
+            traceability = root / "spec/traceability.json"
+            traceability.write_text(
+                '{"schema_version": 2, "source": "derived-from-code-backlinks", "baseline_commit": null, "behaviors": {}}\n',
+                encoding="utf-8",
+            )
+
+            report = spec_drift.analyze_repo(root)
+            self.assertIssue(report, "unbaselined", "FEATURE-001")
+
+            spec_drift.write_traceability(report, traceability)
+            clean = spec_drift.analyze_repo(root)
+
+        self.assertTrue(clean.clean, clean.issues)
+
+    def test_reports_linked_code_changed_since_traceability_baseline(self) -> None:
+        import check as spec_drift
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "spec").mkdir()
+            (root / "SPEC.md").write_text(
+                "---\nstatus: approved\n---\n\nFEATURE-001: Feature works.\n",
+                encoding="utf-8",
+            )
+            code = root / "service.py"
+            code.write_text("# spec: FEATURE-001\nvalue = 1\n", encoding="utf-8")
+            traceability = root / "spec/traceability.json"
+            initial = spec_drift.analyze_repo(root)
+            spec_drift.write_traceability(initial, traceability)
+
+            code.write_text("# spec: FEATURE-001\nvalue = 2\n", encoding="utf-8")
+            changed = spec_drift.analyze_repo(root)
+
+        self.assertIssue(changed, "code-changed", "FEATURE-001")
+
+    def test_reports_baseline_link_that_moved_or_disappeared(self) -> None:
+        import check as spec_drift
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "spec").mkdir()
+            (root / "SPEC.md").write_text(
+                "---\nstatus: approved\n---\n\nFEATURE-001: Feature works.\n",
+                encoding="utf-8",
+            )
+            old = root / "old_service.py"
+            old.write_text("# spec: FEATURE-001\nvalue = 1\n", encoding="utf-8")
+            traceability = root / "spec/traceability.json"
+            spec_drift.write_traceability(spec_drift.analyze_repo(root), traceability)
+
+            old.unlink()
+            (root / "new_service.py").write_text(
+                "# spec: FEATURE-001\nvalue = 1\n", encoding="utf-8"
+            )
+            moved = spec_drift.analyze_repo(root)
+
+        self.assertIssue(moved, "stale-trace", "FEATURE-001")
+        self.assertIssue(moved, "unbaselined", "FEATURE-001")
 
     def test_default_spec_root_is_standalone_spec_directory(self) -> None:
         import check as spec_drift

@@ -56,7 +56,23 @@ Use spec-request-flow to define feature X. Do not implement it.
 The Spec Agent repeatedly clarifies blocking product questions, compares meaningful
 product approaches, writes `spec.md` and `acceptance.md`, asks for approval, records
 the approved product evolution, and then gives you the prompt for a separate Code
-Agent.
+Agent. That handoff requires `spec: BEHAVIOR-ID` backlinks in relevant production code
+and tests.
+
+## Validate implementation traceability
+
+After an approved implementation, the Code Agent establishes the derived baseline and
+then validates it:
+
+```sh
+spec-agent traceability-sync --repo .
+spec-agent validate --repo .
+```
+
+`validate` is read-only and returns failure for missing, unknown, unbaselined, moved,
+or changed backlink evidence. `traceability-sync` is used only after approved
+implementation or explicit reconciliation; it must not be used to hide unexplained
+drift.
 
 ## License
 

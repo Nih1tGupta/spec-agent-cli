@@ -11,6 +11,7 @@ from pathlib import Path
 import typer
 
 from spec_agent.commands.init import cmd_init
+from spec_agent.commands.traceability import cmd_traceability_sync, cmd_validate
 
 
 app = typer.Typer(
@@ -56,6 +57,24 @@ def init_command(
 ) -> None:
     """Install .agents/skills and scaffold missing specification files."""
     raise typer.Exit(cmd_init(repo, check=check, force=force))
+
+
+@app.command("validate")
+def validate_command(
+    repo: Path = typer.Option(Path("."), "--repo", help="Repository to validate."),
+) -> None:
+    """Read-only validation of specifications, backlinks, and traceability."""
+    raise typer.Exit(cmd_validate(repo))
+
+
+@app.command("traceability-sync")
+def traceability_sync_command(
+    repo: Path = typer.Option(
+        Path("."), "--repo", help="Repository whose approved baseline is refreshed."
+    ),
+) -> None:
+    """Refresh derived traceability after approved implementation or reconciliation."""
+    raise typer.Exit(cmd_traceability_sync(repo))
 
 
 def main(argv: list[str] | None = None) -> int:

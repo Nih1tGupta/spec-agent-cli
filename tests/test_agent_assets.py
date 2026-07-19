@@ -96,6 +96,18 @@ class AgentArchitectureTests(unittest.TestCase):
             self.assertIn(name, text)
         self.assertLessEqual(len(text.split()), 220)
 
+    def test_agents_file_contains_mandatory_code_agent_traceability_contract(self) -> None:
+        text = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        for term in (
+            "Code Agent contract",
+            "spec: BEHAVIOR-ID",
+            "production code and tests",
+            "spec-agent traceability-sync",
+            "spec-agent validate",
+            "MUST NOT claim completion",
+        ):
+            self.assertIn(term, text)
+
     def test_spec_md_indexes_feature_spec_packets(self) -> None:
         self.assertTrue((ROOT / "SPEC.md").is_file())
         root_spec = (ROOT / "SPEC.md").read_text(encoding="utf-8")

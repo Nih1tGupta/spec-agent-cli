@@ -144,6 +144,17 @@
 - Specification delta: Added CLI distribution rules, acceptance outcomes, safe initialization behavior, and trusted publishing requirements.
 - Supersedes: missing
 
+## 2026-07-19T12:01:39Z — Enforce Code and Specification Traceability
+
+- Event: EV-CODE-SPEC-TRACEABILITY-ENFORCED
+- Task type: architecture-decision
+- User intent: Require every Code Agent implementation to preserve specification-to-code backlinks so future agents can detect stale specifications and code drift.
+- Behavior IDs: SA-020, SA-021, SA-022, SA-023, TRACE-001, TRACE-002, TRACE-003, TRACE-004, TRACE-005, TRACE-006, TRACE-007, TRACE-008, TRACE-009, TRACE-010, TRACE-011, TRACE-012
+- Product decision: Make backlinks, traceability refresh, and clean validation mandatory in the Code Agent handoff while keeping product specifications implementation-independent.
+- Rationale: Drift detection requires durable implementation evidence connected to stable product behavior IDs.
+- Specification delta: Added the Code Agent traceability contract, schema-v2 backlink baselines, changed-code findings, approved-only validation, and CLI validation commands.
+- Supersedes: missing
+
 ## Mermaid
 
 ```mermaid
@@ -162,4 +173,5 @@ timeline
   2026-07-17T13:59:48Z : EV-PRODUCTION-SKILL-HARDENING-IMPLEMENTED — Adopt Production Skill Hardening
   2026-07-18T20:15:19Z : EV-STRICT-SPEC-AGENT-SEPARATION — Strict Spec Agent Separation
   2026-07-19T05:53:17Z : EV-CLI-DISTRIBUTION-APPROVED — CLI Distribution Approved
+  2026-07-19T12:01:39Z : EV-CODE-SPEC-TRACEABILITY-ENFORCED — Enforce Code and Specification Traceability
 ```

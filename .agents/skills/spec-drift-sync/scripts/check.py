@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Dependency-free structural specification/code drift checker."""
 
-# spec: SA-013, SA-014, SA-015
+# spec: SA-013, SA-014, SA-015, SA-021, SA-022, SA-023, TRACE-004, TRACE-005, TRACE-006, TRACE-007, TRACE-008, TRACE-009, TRACE-011, TRACE-012
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import subprocess
@@ -42,6 +43,7 @@ class SpecEntry:
     statement: str
     spec_file: str
     line: int
+    status: str | None
     planned: bool
     code_status: str | None
     code_refs: tuple[str, ...]
@@ -87,7 +89,12 @@ def analyze_repo(
     entries = tuple(
         entry for source in specs for entry in parse_spec_entries(source, repo)
     )
-    backlinks = tuple(scan_code_backlinks(repo))
+    backlinks = tuple(
+        backlink
+        for backlink in scan_code_backlinks(repo)
+        if _is_spec_agent_source(repo)
+        or not backlink.code_file.startswith(".agents/skills/")
+    )
     known = {entry.behavior_id: entry for entry in entries}
     by_id: dict[str, list[CodeBacklink]] = {}
     for backlink in backlinks:
@@ -119,7 +126,8 @@ def analyze_repo(
                         ref=ref,
                     )
                 )
-        if entry.planned and entry.behavior_id in by_id:
+        requires_link = entry.status in {None, "approved"}
+        if requires_link and entry.planned and entry.behavior_id in by_id:
             link = by_id[entry.behavior_id][0]
             issues.append(
                 DriftIssue(
@@ -132,7 +140,8 @@ def analyze_repo(
                 )
             )
         if (
-            not entry.planned
+            requires_link
+            and not entry.planned
             and entry.code_status != "not_applicable"
             and not entry.code_refs
             and entry.behavior_id not in by_id
@@ -164,6 +173,10 @@ def analyze_repo(
                         )
                     )
 
+    traceability = _read_traceability(repo / "spec/traceability.json")
+    if traceability is not None:
+        issues.extend(_baseline_issues(repo, known, backlinks, traceability))
+
     return DriftReport(
         str(repo),
         " | ".join(str(source) for source in specs),
@@ -181,6 +194,7 @@ def parse_spec_entries(spec_root: Path, repo_root: Path) -> Iterable[SpecEntry]:
         text = _read(path)
         verified = _frontmatter(text, "verified_commit")
         code_status = _frontmatter(text, "code_status")
+        status = _frontmatter(text, "status")
         lines = text.splitlines()
         index = 0
         while index < len(lines):
@@ -203,6 +217,7 @@ def parse_spec_entries(spec_root: Path, repo_root: Path) -> Iterable[SpecEntry]:
                 statement,
                 _relative(path, repo_root),
                 index + 1,
+                status,
                 "[planned]" in statement.lower(),
                 code_status,
                 tuple(refs),
@@ -227,17 +242,24 @@ def scan_code_backlinks(repo_root: Path) -> Iterable[CodeBacklink]:
 def write_traceability(report: DriftReport, output: Path | str) -> dict[str, object]:
     """Write a deterministic, non-normative index derived from code backlinks."""
     target = Path(output)
+    repo = Path(report.repo_root)
     behaviors: dict[str, list[dict[str, object]]] = {}
     for backlink in sorted(
         report.backlinks,
         key=lambda item: (item.behavior_id, item.code_file, item.line),
     ):
+        code_path = repo / backlink.code_file
         behaviors.setdefault(backlink.behavior_id, []).append(
-            {"path": backlink.code_file, "line": backlink.line}
+            {
+                "path": backlink.code_file,
+                "line": backlink.line,
+                "file_sha256": _file_sha256(code_path),
+            }
         )
     document: dict[str, object] = {
-        "schema_version": 1,
+        "schema_version": 2,
         "source": "derived-from-code-backlinks",
+        "baseline_commit": _git(repo, ["rev-parse", "HEAD"]) or None,
         "behaviors": behaviors,
     }
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -246,6 +268,102 @@ def write_traceability(report: DriftReport, output: Path | str) -> dict[str, obj
         encoding="utf-8",
     )
     return document
+
+
+def _read_traceability(path: Path) -> dict[str, object] | None:
+    if not path.is_file():
+        return None
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {"behaviors": {}, "invalid": True}
+    if not isinstance(value, dict) or not isinstance(value.get("behaviors"), dict):
+        return {"behaviors": {}, "invalid": True}
+    return value
+
+
+def _baseline_issues(
+    repo: Path,
+    known: dict[str, SpecEntry],
+    backlinks: tuple[CodeBacklink, ...],
+    traceability: dict[str, object],
+) -> list[DriftIssue]:
+    if traceability.get("invalid"):
+        return [
+            DriftIssue(
+                "invalid-traceability",
+                "TRACEABILITY",
+                "derived traceability file is invalid",
+                code_file="spec/traceability.json",
+            )
+        ]
+
+    raw_behaviors = traceability.get("behaviors", {})
+    baseline: dict[tuple[str, str], dict[str, object]] = {}
+    if isinstance(raw_behaviors, dict):
+        for behavior_id, raw_links in raw_behaviors.items():
+            if not isinstance(behavior_id, str) or not isinstance(raw_links, list):
+                continue
+            for raw_link in raw_links:
+                if not isinstance(raw_link, dict):
+                    continue
+                path = raw_link.get("path")
+                if isinstance(path, str) and path:
+                    baseline[(behavior_id, path)] = raw_link
+
+    current = {(link.behavior_id, link.code_file): link for link in backlinks}
+    findings: list[DriftIssue] = []
+    for key, backlink in sorted(current.items()):
+        behavior_id, code_file = key
+        if not _entry_exists(behavior_id, known):
+            continue
+        previous = baseline.get(key)
+        if previous is None:
+            findings.append(
+                DriftIssue(
+                    "unbaselined",
+                    behavior_id,
+                    "current backlink is not in the traceability baseline",
+                    code_file=code_file,
+                    line=backlink.line,
+                )
+            )
+            continue
+        expected_hash = previous.get("file_sha256")
+        if isinstance(expected_hash, str) and expected_hash:
+            current_hash = _file_sha256(repo / code_file)
+            if current_hash != expected_hash:
+                findings.append(
+                    DriftIssue(
+                        "code-changed",
+                        behavior_id,
+                        "linked code file changed since the traceability baseline",
+                        code_file=code_file,
+                        line=backlink.line,
+                    )
+                )
+
+    for key, previous in sorted(baseline.items()):
+        if key in current:
+            continue
+        behavior_id, code_file = key
+        findings.append(
+            DriftIssue(
+                "stale-trace",
+                behavior_id,
+                "baseline backlink moved or disappeared",
+                code_file=code_file,
+                line=previous.get("line") if isinstance(previous.get("line"), int) else None,
+            )
+        )
+    return findings
+
+
+def _file_sha256(path: Path) -> str:
+    try:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+    except OSError:
+        return hashlib.sha256(b"").hexdigest()
 
 
 def render_text(report: DriftReport) -> str:
@@ -375,6 +493,11 @@ def _entry_exists(behavior_id: str, entries: dict[str, SpecEntry]) -> bool:
 
 def _is_git_repo(repo: Path) -> bool:
     return _git(repo, ["rev-parse", "--is-inside-work-tree"]) == "true"
+
+
+def _is_spec_agent_source(repo: Path) -> bool:
+    """True only in this package's source tree, not an initialized consumer repo."""
+    return (repo / "src/spec_agent/installer.py").is_file()
 
 
 def _git(repo: Path, args: list[str]) -> str:

@@ -2,7 +2,7 @@
 id: SPEC-AGENT
 title: Strict Spec Agent
 status: approved
-version: 4.0.0
+version: 4.1.0
 ---
 
 # Strict Spec Agent
@@ -28,6 +28,7 @@ hands the approved specification to a separate Code Agent.
 - [Evolution event log rules](spec/features/evolution-event-log/spec.md) and [acceptance](spec/features/evolution-event-log/acceptance.md)
 - [Strict skill behavior](spec/features/production-skill-hardening/spec.md) and [acceptance](spec/features/production-skill-hardening/acceptance.md)
 - [CLI distribution](spec/features/cli-distribution/spec.md) and [acceptance](spec/features/cli-distribution/acceptance.md)
+- [Code/spec traceability](spec/features/code-spec-traceability/spec.md) and [acceptance](spec/features/code-spec-traceability/acceptance.md)
 
 ## Product structure
 
@@ -125,6 +126,23 @@ merge a managed rules block safely, and scaffold only missing project-owned arti
 SA-019: Repeated initialization MUST be safe and idempotent, and forced updates MUST
 remain limited to CLI-managed skill assets.
 
+## Code Agent traceability contract
+
+SA-020: The Code Agent handoff MUST require both feature specifications, stable
+behavior-ID backlinks in relevant production code and tests, traceability refresh, and
+a clean drift validation before implementation completion.
+
+SA-021: Derived traceability MUST preserve a baseline of backlink locations and linked
+file fingerprints so later code changes can be reported without placing code paths in
+normative specifications.
+
+SA-022: Drift validation MUST be read-only and MUST distinguish missing, unknown,
+unbaselined, moved, and changed-code evidence while leaving semantic authority to a
+human product decision.
+
+SA-023: Traceability refresh MUST establish a new baseline only after an approved
+implementation or reconciliation; it MUST NOT silently make changed code authoritative.
+
 ## Workflow
 
 ```text
@@ -163,3 +181,7 @@ refresh derived traceability, and route a product decision back through request 
 - AC-SA-006: Approved product evolution remains append-only and UI-readable.
 - AC-SA-007: A built wheel installs in a clean environment and initializes a repository
   that passes `spec-agent init --check`.
+- AC-SA-008: A Code Agent handoff cannot complete without behavior backlinks, refreshed
+  traceability, and clean read-only validation.
+- AC-SA-009: Modifying a baselined linked code file produces a drift finding until an
+  authorized reconciliation establishes a new baseline.

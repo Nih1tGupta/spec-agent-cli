@@ -5,44 +5,37 @@ description: Use when a user asks to add, change, fix, refactor, design, or impl
 
 # Spec Request Flow
 
-Produce an approved, implementation-independent product specification, then stop with
-a discoverable Code Agent handoff.
+Produce an approved product specification, then stop with a Code Agent handoff.
 
 <HARD-GATE>
-Do not scaffold or write specification files before the user approves the presented
-product decisions. Do not create an implementation plan, choose repository files,
-write code or tests, dispatch implementation, or perform engineering verification at
-any point in this skill.
+Do not scaffold or write specifications before product-decision approval.
+Do not create an implementation plan or choose files or technologies. Do not write
+code or tests, dispatch implementation, or perform engineering verification.
 </HARD-GATE>
 
 ## Explore context
 
-1. Read applicable `AGENTS.md`, root `SPEC.md`, the existing feature packet, relevant
-   product behavior, and related `spec/evolution/events.jsonl` entries.
-2. Separate evidence, outcomes, conflicts, assumptions, and unknowns.
-3. If the request contains independent subsystems, propose decomposition and process
-   one independently valuable feature at a time.
+Read `AGENTS.md`, root `SPEC.md`, the existing packet, relevant behavior, and related
+evolution events. Separate evidence, outcomes, conflicts, assumptions, and unknowns.
+Decompose independent subsystems and process one valuable feature at a time.
 
 ## Clarify product behavior
 
-1. Ask one blocking question at a time. Do not ask what repository evidence answers.
-2. For each material product decision, present 2-3 approaches, trade-offs, and a
-   recommendation. Keep choices about observable behavior, not technical solutions.
-3. Cover actors, rules, conceptual data, primary and alternate flows, failures,
-   recovery, states, edges, permissions, privacy, defaults, constraints, non-goals,
-   and measurable outcomes.
-4. Label every unresolved item `blocking` or `non-blocking`. Never turn an assumption
-   into an accepted requirement.
+Ask one blocking question at a time. Present 2-3 approaches for each material product
+decision, with trade-offs and a recommendation about observable behavior. Cover actors,
+rules, conceptual data, flows, failures, recovery, states, edges, permissions, privacy,
+defaults, constraints, non-goals, and measurable outcomes. Label every unresolved item
+`blocking` or `non-blocking`; never convert an assumption into a requirement.
 
 ## Requirements-completeness gate
 
-Verify every category above before presenting the product decision. Continue while any
-blocking item remains. Defer one only when the user approves a stated default.
+Verify every category above. Continue while a blocking item remains; defer only with
+user approval of a stated default.
 
 ## Product-decision approval gate
 
-Present the proposed product behavior and ask the user to approve or revise it. Do not
-scaffold or write either specification file while approval is absent or ambiguous.
+Present the product behavior for approval or revision. Do not write either file while
+approval is absent or ambiguous.
 
 ## Write and self-review the specification
 
@@ -62,15 +55,15 @@ revised, update both files, rerun self-review, and ask again.
 
 ## Completion and Code Agent handoff
 
-After approval, mark both files `approved`, use `spec-evolution` to record the approved
-product decision, and stop. `spec-drift-sync` is used later as a read-only observer;
-it is not implementation work for this skill.
+After approval, mark both files `approved`, use `spec-evolution` to record the decision,
+emit the contract below, and stop. `spec-drift-sync` is used after implementation.
 
 Output exactly the following, replacing `[SPEC_PATH]` with the actual `spec.md` path:
 
-Spec complete. To implement this, give your Code Agent the following prompt: 'Read the specification at [SPEC_PATH] and generate an implementation plan.'
+Spec complete. To implement this, give your Code Agent the following prompt: 'Read the specification at [SPEC_PATH] and its companion acceptance.md, then generate an implementation plan. During implementation, add spec: BEHAVIOR-ID backlinks to relevant production code and tests for every implemented rule. After the approved implementation, run spec-agent traceability-sync --repo ., followed by spec-agent validate --repo . Do not claim completion unless validation reports CLEAN.'
 
-Do not append planning advice, implementation steps, or an offer to write code.
+This is a handoff contract, not implementation by the Spec Agent. Do not append other
+planning advice, implementation steps, or an offer to write code.
 
 ## Later changes
 

@@ -19,17 +19,23 @@ non-normative derived traceability index from backlinks that already exist in co
 1. Read root `SPEC.md`, both files in the affected feature packet, current code and
    public behavior, existing `spec: BEHAVIOR-ID` backlinks, relevant Git changes, and
    related product-decision history.
-2. Run `scripts/check.py check --repo REPOSITORY`. Use `--spec-root SPEC_SOURCE` only
-   for an intentionally scoped observation.
+2. Run `spec-agent validate --repo REPOSITORY`; if the CLI is unavailable, run
+   `scripts/check.py check --repo REPOSITORY`. Use `--spec-root SPEC_SOURCE` only for
+   an intentionally scoped observation.
 3. Inspect meaning manually. A clean structural report proves identity consistency,
    not semantic compliance.
 
 ## Traceability refresh
 
-Run `scripts/check.py sync --repo REPOSITORY --output spec/traceability.json` to replace
-only the derived traceability index. It maps behavior IDs to existing code backlink
-locations. It must not be copied into `spec.md` or `acceptance.md`, treated as product
-authority, or edited to conceal missing links.
+After an approved implementation or explicit reconciliation, run `spec-agent
+traceability-sync --repo REPOSITORY`; if the CLI is unavailable, run `scripts/check.py
+sync --repo REPOSITORY --output spec/traceability.json`. It records behavior IDs,
+backlink locations, and linked-file fingerprints in the derived traceability baseline.
+
+Do not refresh traceability to silence unexplained drift. Validate first, understand
+existing findings, and refresh only when product intent or implementation authority is
+explicit. Never copy traceability into `spec.md` or `acceptance.md` or treat it as
+product authority.
 
 ## Evidence report
 
@@ -41,9 +47,10 @@ For every finding report:
 - structural identity problem or semantic conflict;
 - observable impact and the authority decision required.
 
-Structural findings include `phantom`, `dead-ref`, `silent-implementation`, `unlinked`,
-and `stale-verification`. Semantic conflicts include code contradicting accepted
-behavior, obsolete or ambiguous product rules, and behavior without product authority.
+Structural findings include `phantom`, `unlinked`, `unbaselined`, `stale-trace`,
+`code-changed`, legacy `dead-ref`, `silent-implementation`, and `stale-verification`.
+Semantic conflicts include code contradicting accepted behavior, obsolete or ambiguous
+product rules, and behavior without product authority.
 
 ## Authority handoff
 

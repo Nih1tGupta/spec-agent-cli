@@ -3,7 +3,7 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
-# spec: SA-005, SA-006, SA-007, SA-008, SA-009, SA-010, SA-011, SA-012, SA-016, ELOG-006, PSH-002, PSH-003, PSH-004, PSH-005, PSH-006, PSH-007, PSH-008, PSH-009, PSH-010, PSH-011
+# spec: SA-005, SA-006, SA-007, SA-008, SA-009, SA-010, SA-011, SA-012, SA-016, SA-020, ELOG-006, PSH-002, PSH-003, PSH-004, PSH-005, PSH-006, PSH-007, PSH-008, PSH-009, PSH-010, PSH-011, TRACE-002, TRACE-003, TRACE-009, TRACE-010, TRACE-011
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -70,10 +70,18 @@ class SkillWorkflowTests(unittest.TestCase):
         self.assertNotIn("TDD", text)
         self.assertNotIn("debugging", text)
         self.assertIn(
-            "Spec complete. To implement this, give your Code Agent the following prompt: "
-            "'Read the specification at [SPEC_PATH] and generate an implementation plan.'",
+            "Spec complete. To implement this, give your Code Agent the following prompt:",
             text,
         )
+        for term in (
+            "acceptance.md",
+            "spec: BEHAVIOR-ID",
+            "production code and tests",
+            "spec-agent traceability-sync",
+            "spec-agent validate",
+            "reports CLEAN",
+        ):
+            self.assertIn(term, text)
         self.assertIn("spec-drift-sync", text)
         self.assertIn("spec-evolution", text)
 
@@ -144,6 +152,9 @@ class SkillWorkflowTests(unittest.TestCase):
         self.assertIn("Do not edit specifications, code, tests", text)
         self.assertNotIn("## Repair and validation", text)
         self.assertNotIn("Apply only the approved delta", text)
+        self.assertIn("linked-file fingerprints", text)
+        self.assertIn("Do not refresh", text)
+        self.assertIn("spec-agent validate", text)
 
     def test_evolution_flow_defines_product_boundaries_and_privacy(self) -> None:
         text = skill("spec-evolution")
