@@ -135,8 +135,8 @@ def _scaffold_items(repo_root: Path) -> list[tuple[str, str]]:
     return [
         ("SPEC.md", "present" if (repo_root / "SPEC.md").is_file() else "missing"),
         (
-            "spec/features/",
-            "present" if (repo_root / "spec/features").is_dir() else "missing",
+            "spec/packets/",
+            "present" if (repo_root / "spec/packets").is_dir() else "missing",
         ),
         (
             "spec/evolution/events.jsonl",
@@ -209,7 +209,7 @@ def install(repo_root: Path, *, force: bool = False) -> list[tuple[str, str]]:
     rows.extend(
         [
             ("SPEC.md", _create_file(root / "SPEC.md", package_assets.project_spec_template())),
-            ("spec/features/", _create_directory(root / "spec/features")),
+            ("spec/packets/", _create_directory(root / "spec/packets")),
             (
                 "spec/evolution/events.jsonl",
                 _create_file(root / "spec/evolution/events.jsonl", ""),

@@ -24,8 +24,8 @@ PROJECT-001: Write one testable current-state requirement.
 
 List each accepted or active feature and link both normative product files:
 
-- `spec/features/feature-name/spec.md`
-- `spec/features/feature-name/acceptance.md`
+- `spec/packets/feature-name/spec.md`
+- `spec/packets/feature-name/acceptance.md`
 
 ## Repository-wide interfaces, state, and failures
 

@@ -56,7 +56,7 @@ class SpecDriftTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            feature = root / "spec/features/feature-x"
+            feature = root / "spec/packets/feature-x"
             feature.mkdir(parents=True)
             (root / "SPEC.md").write_text(
                 "ROOT-001: Repository behavior is indexed.\n  ~ root.py\n",

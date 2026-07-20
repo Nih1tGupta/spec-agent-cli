@@ -1,6 +1,6 @@
 """Command-line interface for installing Spec Agent into repositories."""
 
-# spec: CLI-001, CLI-007, CLI-008
+# spec: CLI-001, CLI-007, CLI-008, UI-005
 
 from __future__ import annotations
 
@@ -12,6 +12,7 @@ import typer
 
 from spec_agent.commands.init import cmd_init
 from spec_agent.commands.traceability import cmd_traceability_sync, cmd_validate
+from spec_agent.commands.ui import cmd_ui
 
 
 app = typer.Typer(
@@ -75,6 +76,17 @@ def traceability_sync_command(
 ) -> None:
     """Refresh derived traceability after approved implementation or reconciliation."""
     raise typer.Exit(cmd_traceability_sync(repo))
+
+
+@app.command("ui")
+def ui_command(
+    repo: Path = typer.Option(Path("."), "--repo", help="Repository to inspect."),
+    host: str = typer.Option("127.0.0.1", "--host", help="Host interface to bind."),
+    port: int = typer.Option(0, "--port", min=0, max=65535, help="Port; 0 chooses a free port."),
+    no_open: bool = typer.Option(False, "--no-open", help="Do not open a browser window."),
+) -> None:
+    """Open the local read-only specification and traceability dashboard."""
+    raise typer.Exit(cmd_ui(repo, host=host, port=port, open_browser=not no_open))
 
 
 def main(argv: list[str] | None = None) -> int:

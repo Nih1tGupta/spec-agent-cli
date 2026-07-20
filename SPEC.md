@@ -25,12 +25,13 @@ hands the approved specification to a separate Code Agent.
 
 ## Feature specifications
 
-- [Feature specification rules](spec/features/feature-spec-packets/spec.md) and [acceptance](spec/features/feature-spec-packets/acceptance.md)
-- [Evolution event log rules](spec/features/evolution-event-log/spec.md) and [acceptance](spec/features/evolution-event-log/acceptance.md)
-- [Strict skill behavior](spec/features/production-skill-hardening/spec.md) and [acceptance](spec/features/production-skill-hardening/acceptance.md)
-- [CLI distribution](spec/features/cli-distribution/spec.md) and [acceptance](spec/features/cli-distribution/acceptance.md)
-- [Code/spec traceability](spec/features/code-spec-traceability/spec.md) and [acceptance](spec/features/code-spec-traceability/acceptance.md)
-- [Claude Code discovery](spec/features/claude-code-discovery/spec.md) and [acceptance](spec/features/claude-code-discovery/acceptance.md)
+- [Feature specification rules](spec/packets/feature-spec-packets/spec.md) and [acceptance](spec/packets/feature-spec-packets/acceptance.md)
+- [Evolution event log rules](spec/packets/evolution-event-log/spec.md) and [acceptance](spec/packets/evolution-event-log/acceptance.md)
+- [Strict skill behavior](spec/packets/production-skill-hardening/spec.md) and [acceptance](spec/packets/production-skill-hardening/acceptance.md)
+- [CLI distribution](spec/packets/cli-distribution/spec.md) and [acceptance](spec/packets/cli-distribution/acceptance.md)
+- [Code/spec traceability](spec/packets/code-spec-traceability/spec.md) and [acceptance](spec/packets/code-spec-traceability/acceptance.md)
+- [Claude Code discovery](spec/packets/claude-code-discovery/spec.md) and [acceptance](spec/packets/claude-code-discovery/acceptance.md)
+- [Local specification workspace](spec/packets/local-dashboard/spec.md) and [acceptance](spec/packets/local-dashboard/acceptance.md)
 
 ## Product structure
 

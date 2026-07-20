@@ -104,11 +104,11 @@ class SkillWorkflowTests(unittest.TestCase):
         self.assertIn("approved", text)
 
     def test_two_spec_templates_are_product_only(self) -> None:
-        feature = (SKILLS / "spec-request-flow/assets/feature-spec.template.md").read_text(
+        feature = (SKILLS / "spec-request-flow/assets/packet-spec.template.md").read_text(
             encoding="utf-8"
         )
         acceptance = (
-            SKILLS / "spec-request-flow/assets/feature-acceptance.template.md"
+            SKILLS / "spec-request-flow/assets/packet-acceptance.template.md"
         ).read_text(encoding="utf-8")
         for term in (
             "Users and actors",

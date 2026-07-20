@@ -18,9 +18,9 @@ REQUIRED_RESOURCES = {
     "spec-request-flow": {
         "references/spec-format.md",
         "assets/SPEC.template.md",
-        "assets/feature-spec.template.md",
-        "assets/feature-acceptance.template.md",
-        "scripts/create_feature.py",
+        "assets/packet-spec.template.md",
+        "assets/packet-acceptance.template.md",
+        "scripts/create_packet.py",
     },
     "spec-drift-sync": {"scripts/check.py"},
     "spec-evolution": {"scripts/record.py", "scripts/timeline.py"},
@@ -111,8 +111,8 @@ class AgentArchitectureTests(unittest.TestCase):
         self.assertIn("spec-drift-sync", text)
         self.assertIn("spec-evolution", text)
         self.assertIn("SPEC.md", text)
-        self.assertIn("spec/features/<feature-slug>", text)
-        self.assertIn("scripts/create_feature.py", text)
+        self.assertIn("spec/packets/<feature-slug>", text)
+        self.assertIn("scripts/create_packet.py", text)
 
     def test_agents_file_is_a_concise_router(self) -> None:
         text = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
@@ -145,8 +145,8 @@ class AgentArchitectureTests(unittest.TestCase):
     def test_spec_md_indexes_feature_spec_packets(self) -> None:
         self.assertTrue((ROOT / "SPEC.md").is_file())
         root_spec = (ROOT / "SPEC.md").read_text(encoding="utf-8")
-        self.assertIn("spec/features/feature-spec-packets/spec.md", root_spec)
-        for packet in (ROOT / "spec/features").iterdir():
+        self.assertIn("spec/packets/feature-spec-packets/spec.md", root_spec)
+        for packet in (ROOT / "spec/packets").iterdir():
             if not packet.is_dir():
                 continue
             self.assertEqual(

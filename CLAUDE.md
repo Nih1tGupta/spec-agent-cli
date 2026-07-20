@@ -2,7 +2,7 @@
 
 Read root `SPEC.md`, then load one discoverable skill from `.claude/skills/`.
 Feature packets contain product-only `spec.md` and `acceptance.md` files under
-`spec/features/<feature-slug>/`.
+`spec/packets/<feature-slug>/`.
 
 | Situation | Load skill |
 |---|---|

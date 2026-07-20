@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / ".agents/skills/spec-request-flow/scripts/create_feature.py"
+SCRIPT = ROOT / ".agents/skills/spec-request-flow/scripts/create_packet.py"
 
 
 class FeatureScaffoldTests(unittest.TestCase):
@@ -32,7 +32,7 @@ class FeatureScaffoldTests(unittest.TestCase):
                 text=True,
             )
 
-            packet = repo / "spec/features/feature-x"
+            packet = repo / "spec/packets/feature-x"
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertEqual(
                 {path.name for path in packet.glob("*.md")},
@@ -73,7 +73,7 @@ class FeatureScaffoldTests(unittest.TestCase):
                 str(repo),
             ]
             self.assertEqual(subprocess.run(command, check=False).returncode, 0)
-            spec = repo / "spec/features/feature-x/spec.md"
+            spec = repo / "spec/packets/feature-x/spec.md"
             spec.write_text("preserve me\n", encoding="utf-8")
 
             repeated = subprocess.run(

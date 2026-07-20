@@ -55,8 +55,8 @@ class EventLogTests(unittest.TestCase):
                     "user_intent": "Implement Feature X.",
                     "behavior_ids": ["FEATURE-X-001"],
                     "spec_files": [
-                        "spec/features/feature-x/spec.md",
-                        "spec/features/feature-x/acceptance.md",
+                        "spec/packets/feature-x/spec.md",
+                        "spec/packets/feature-x/acceptance.md",
                     ],
                     "decision": "Use the approved indexed packet.",
                     "rationale": "Keeps product rules separate from acceptance.",

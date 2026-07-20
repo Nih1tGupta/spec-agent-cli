@@ -44,6 +44,7 @@ include = [
     "/.agents/skills",
     "/.claude/skills",
     "/src/spec_agent",
+    "/src/spec_agent/ui_assets",
     "/tests",
     "/AGENTS.md",
     "/CLAUDE.md",
