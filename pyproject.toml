@@ -38,7 +38,6 @@ packages = ["src/spec_agent"]
 [tool.hatch.build.targets.wheel.force-include]
 ".agents/skills" = "spec_agent/resources/skills"
 "AGENTS.md" = "spec_agent/resources/project-rules.md"
-"src/spec_agent/ui_assets" = "spec_agent/ui_assets"
 
 [tool.hatch.build.targets.sdist]
 include = [
