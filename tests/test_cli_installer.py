@@ -39,7 +39,7 @@ def test_fresh_init_installs_complete_open_agent_package(tmp_path: Path) -> None
     assert (tmp_path / "AGENTS.md").read_text().count(installer.MARKER_START) == 1
     assert (tmp_path / "CLAUDE.md").read_text().count(installer.MARKER_START) == 1
     assert (tmp_path / "SPEC.md").is_file()
-    assert (tmp_path / "spec/features").is_dir()
+    assert (tmp_path / "spec/packets").is_dir()
     assert (tmp_path / "spec/evolution/events.jsonl").read_text() == ""
     assert (tmp_path / "spec/evolution/timeline.md").is_file()
     assert (tmp_path / "spec/traceability.json").is_file()
@@ -128,7 +128,7 @@ def test_installer_never_copies_package_self_specs_or_tests(tmp_path: Path) -> N
 
     installed = snapshot(tmp_path)
     assert not any(path.startswith("tests/") for path in installed)
-    assert not any(path.startswith("spec/features/") for path in installed)
+    assert not any(path.startswith("spec/packets/") for path in installed)
     assert "spec/evolution/events.jsonl" in installed
     assert "spec/traceability.json" in installed
     assert not any("__pycache__" in path or path.endswith(".pyc") for path in installed)

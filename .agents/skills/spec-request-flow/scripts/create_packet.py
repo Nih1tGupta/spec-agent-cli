@@ -13,8 +13,8 @@ from pathlib import Path
 
 SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 TEMPLATES = {
-    "spec.md": "feature-spec.template.md",
-    "acceptance.md": "feature-acceptance.template.md",
+    "spec.md": "packet-spec.template.md",
+    "acceptance.md": "packet-acceptance.template.md",
 }
 
 
@@ -38,7 +38,7 @@ def create_packet(repo: Path, slug: str, title: str | None = None) -> Path:
             text = text.replace(token, value)
         rendered[output_name] = text
 
-    target = repo.resolve() / "spec/features" / slug
+    target = repo.resolve() / "spec/packets" / slug
     target.mkdir(parents=True, exist_ok=False)
     for output_name, text in rendered.items():
         (target / output_name).write_text(text, encoding="utf-8")

@@ -40,7 +40,7 @@ AGENTS.md                         # managed rules block; user content is preserv
 .claude/skills/spec-evolution/
 CLAUDE.md                         # managed Claude rules block; user content is preserved
 SPEC.md                           # created only when absent
-spec/features/
+spec/packets/
 spec/evolution/events.jsonl
 spec/evolution/timeline.md
 spec/traceability.json
@@ -80,6 +80,18 @@ spec-agent validate --repo .
 or changed backlink evidence. `traceability-sync` is used only after approved
 implementation or explicit reconciliation; it must not be used to hide unexplained
 drift.
+
+## Open the local workspace
+
+After initializing a repository, launch the read-only Potpie-inspired dashboard:
+
+```sh
+spec-agent ui --repo .
+```
+
+Use `--no-open` in headless environments. The dashboard reads `SPEC.md`, packet
+specifications, acceptance scenarios, evolution events, Git history, drift results,
+and derived traceability without modifying the repository.
 
 ## License
 

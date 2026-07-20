@@ -39,8 +39,8 @@ approval is absent or ambiguous.
 
 ## Write and self-review the specification
 
-1. Reuse `spec/features/<feature-slug>/` when present; otherwise run
-   `scripts/create_feature.py <feature-slug> --title "Feature Title"`.
+1. Reuse `spec/packets/<feature-slug>/` when present; otherwise run
+   `scripts/create_packet.py <feature-slug> --title "Feature Title"`.
 2. Read [references/spec-format.md](references/spec-format.md). Write both `spec.md`
    and `acceptance.md`; add both paths to root `SPEC.md`.
 3. Keep both files strictly product-facing. Do not include code paths, symbols,

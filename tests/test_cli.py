@@ -17,6 +17,11 @@ def test_cli_version(capsys) -> None:
     assert capsys.readouterr().out.startswith("spec-agent ")
 
 
+def test_cli_exposes_read_only_ui_command(capsys) -> None:
+    assert main(["--help"]) == 0
+    assert "ui" in capsys.readouterr().out
+
+
 def test_cli_init_and_check(tmp_path: Path) -> None:
     assert main(["init", "--repo", str(tmp_path)]) == 0
     assert main(["init", "--repo", str(tmp_path), "--check"]) == 0

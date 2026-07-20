@@ -36,7 +36,7 @@ one lifecycle status, and stable behavior IDs referenced by product history.
 
 ## Business rules
 
-FSP-001: Every material feature MUST use `spec/features/<feature-slug>/` containing
+FSP-001: Every material feature MUST use `spec/packets/<feature-slug>/` containing
 exactly `spec.md` and `acceptance.md` as its normative product artifacts.
 
 FSP-002: Feature slugs MUST use lowercase kebab-case, and packet creation MUST NOT

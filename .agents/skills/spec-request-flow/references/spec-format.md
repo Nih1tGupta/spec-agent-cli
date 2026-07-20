@@ -1,7 +1,7 @@
 # Specification Format
 
 Root `SPEC.md` is the product-wide contract and feature index. Each material feature
-lives in `spec/features/<feature-slug>/` and contains exactly two product artifacts:
+lives in `spec/packets/<feature-slug>/` and contains exactly two product artifacts:
 
 - `spec.md`: normative product rules, actors, conceptual data, flows, states,
   permissions, constraints, and approved decisions;
@@ -25,7 +25,7 @@ Implementation and verification status never changes the meaning or status of an
 approved product specification. Keep behavior IDs stable across revisions. Record
 approved transitions in evolution history; keep current truth in the two spec files.
 
-Use `scripts/create_feature.py <feature-slug> --title "Feature Title"` to create the
+Use `scripts/create_packet.py <feature-slug> --title "Feature Title"` to create the
 two-file packet without overwriting existing work. Replace every instruction with
 feature-specific content before requesting approval.
 
