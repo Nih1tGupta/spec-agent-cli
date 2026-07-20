@@ -84,6 +84,6 @@ def test_dashboard_contains_three_panels_and_visualization_surfaces() -> None:
         "Evolution",
         "Drift",
             "Traceability",
-            "Spec Evolution: event",
+            "event → change → rule",
     ):
         assert marker in html

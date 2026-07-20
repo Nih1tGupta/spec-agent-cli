@@ -1,5 +1,5 @@
 {
-  "baseline_commit": "92a72e76fc5eddab937e5c2dc480206fb62949b8",
+  "baseline_commit": "7c292b3b455366923b03cd06c54094b4e4d1b12c",
   "behaviors": {
     "AC-CCD-001": [
       {
@@ -1022,48 +1022,48 @@
     ],
     "UI-001": [
       {
-        "file_sha256": "366a367eadd0d71a64509c4e1df4c459d7ef617656e49bd9a39f5506b494945b",
+        "file_sha256": "ec527cd12fd71c876facfd4b5e07b828507053dcb9c55357e19f52b4a713d533",
         "line": 3,
         "path": "src/spec_agent/ui.py"
       },
       {
-        "file_sha256": "d05c3b5e27fde47a25fcef007f5ba637c0408831bcb122fee7a669305f24296c",
+        "file_sha256": "4f719a693e4fd86003cf2148ac216032442fc97060211b01529d235065896abd",
         "line": 3,
         "path": "tests/test_ui.py"
       }
     ],
     "UI-002": [
       {
-        "file_sha256": "366a367eadd0d71a64509c4e1df4c459d7ef617656e49bd9a39f5506b494945b",
+        "file_sha256": "ec527cd12fd71c876facfd4b5e07b828507053dcb9c55357e19f52b4a713d533",
         "line": 3,
         "path": "src/spec_agent/ui.py"
       },
       {
-        "file_sha256": "d05c3b5e27fde47a25fcef007f5ba637c0408831bcb122fee7a669305f24296c",
+        "file_sha256": "4f719a693e4fd86003cf2148ac216032442fc97060211b01529d235065896abd",
         "line": 3,
         "path": "tests/test_ui.py"
       }
     ],
     "UI-003": [
       {
-        "file_sha256": "366a367eadd0d71a64509c4e1df4c459d7ef617656e49bd9a39f5506b494945b",
+        "file_sha256": "ec527cd12fd71c876facfd4b5e07b828507053dcb9c55357e19f52b4a713d533",
         "line": 3,
         "path": "src/spec_agent/ui.py"
       },
       {
-        "file_sha256": "d05c3b5e27fde47a25fcef007f5ba637c0408831bcb122fee7a669305f24296c",
+        "file_sha256": "4f719a693e4fd86003cf2148ac216032442fc97060211b01529d235065896abd",
         "line": 3,
         "path": "tests/test_ui.py"
       }
     ],
     "UI-004": [
       {
-        "file_sha256": "366a367eadd0d71a64509c4e1df4c459d7ef617656e49bd9a39f5506b494945b",
+        "file_sha256": "ec527cd12fd71c876facfd4b5e07b828507053dcb9c55357e19f52b4a713d533",
         "line": 3,
         "path": "src/spec_agent/ui.py"
       },
       {
-        "file_sha256": "d05c3b5e27fde47a25fcef007f5ba637c0408831bcb122fee7a669305f24296c",
+        "file_sha256": "4f719a693e4fd86003cf2148ac216032442fc97060211b01529d235065896abd",
         "line": 3,
         "path": "tests/test_ui.py"
       }
@@ -1075,33 +1075,33 @@
         "path": "src/spec_agent/cli.py"
       },
       {
-        "file_sha256": "d05c3b5e27fde47a25fcef007f5ba637c0408831bcb122fee7a669305f24296c",
+        "file_sha256": "4f719a693e4fd86003cf2148ac216032442fc97060211b01529d235065896abd",
         "line": 3,
         "path": "tests/test_ui.py"
       }
     ],
     "UI-006": [
       {
-        "file_sha256": "366a367eadd0d71a64509c4e1df4c459d7ef617656e49bd9a39f5506b494945b",
+        "file_sha256": "ec527cd12fd71c876facfd4b5e07b828507053dcb9c55357e19f52b4a713d533",
         "line": 3,
         "path": "src/spec_agent/ui.py"
       },
       {
-        "file_sha256": "d05c3b5e27fde47a25fcef007f5ba637c0408831bcb122fee7a669305f24296c",
+        "file_sha256": "4f719a693e4fd86003cf2148ac216032442fc97060211b01529d235065896abd",
         "line": 3,
         "path": "tests/test_ui.py"
       }
     ],
     "UI-007": [
       {
-        "file_sha256": "366a367eadd0d71a64509c4e1df4c459d7ef617656e49bd9a39f5506b494945b",
+        "file_sha256": "ec527cd12fd71c876facfd4b5e07b828507053dcb9c55357e19f52b4a713d533",
         "line": 3,
         "path": "src/spec_agent/ui.py"
       }
     ],
     "UI-008": [
       {
-        "file_sha256": "366a367eadd0d71a64509c4e1df4c459d7ef617656e49bd9a39f5506b494945b",
+        "file_sha256": "ec527cd12fd71c876facfd4b5e07b828507053dcb9c55357e19f52b4a713d533",
         "line": 3,
         "path": "src/spec_agent/ui.py"
       }

@@ -105,6 +105,9 @@ def serve_dashboard(
             if parsed.path == "/api/file":
                 self._send_file(parse_qs(parsed.query).get("path", [""])[0])
                 return
+            if parsed.path == "/ui_assets/potpie-logo.jpeg":
+                self._send_asset("potpie-logo.jpeg")
+                return
             self.send_error(404, "Not found")
 
         def _send_json(self, payload: Any) -> None:
@@ -144,6 +147,19 @@ def serve_dashboard(
                 self.send_error(404, "File unavailable")
                 return
             self._send_text(content, "text/plain; charset=utf-8")
+
+        def _send_asset(self, filename: str) -> None:
+            asset = Path(__file__).with_name("ui_assets") / filename
+            if not asset.is_file():
+                self.send_error(404, "Asset unavailable")
+                return
+            body = asset.read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", "image/jpeg")
+            self.send_header("Cache-Control", "public, max-age=3600")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
 
         def log_message(self, format: str, *args: Any) -> None:
             return
