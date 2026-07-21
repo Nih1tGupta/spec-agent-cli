@@ -1,7 +1,15 @@
 import type { ReactNode } from "react";
 import type { EvolutionEvent, Packet } from "../types";
+import { Truncate } from "./Shared";
 
 type NodeKind = "authored" | "decision" | "rules" | "observed";
+
+function shortenId(value: string, max = 28): string {
+  if (value.length <= max) return value;
+  const head = Math.ceil((max - 1) / 2);
+  const tail = Math.floor((max - 1) / 2);
+  return `${value.slice(0, head)}…${value.slice(-tail)}`;
+}
 
 function FlowArrow() {
   return (
@@ -61,17 +69,18 @@ export function PacketTraceDiagram({
 }) {
   const eventId = event?.id || packet?.event_details?.[0]?.id || "event";
   const ruleIds = packet?.behavior_ids || [];
-  const shownRules = ruleIds.slice(0, 3);
+  const shownRules = ruleIds.slice(0, 2);
   const extraRules = Math.max(0, ruleIds.length - shownRules.length);
   const fileCount = packet?.linked_files.length || 0;
+  const packetPath = packet?.source_dir || "specification packet";
 
   return (
     <div className="flow-diagram" role="img" aria-label="Packet evidence flow">
       <div className="flow-rail">
         <FlowNode kind="authored" label="Authored">
           <strong>spec.md</strong>
-          <small className="clamp-2" title={packet?.source_dir || undefined}>
-            {packet?.source_dir || "specification packet"}
+          <small title={packetPath}>
+            <Truncate>{packetPath}</Truncate>
           </small>
         </FlowNode>
 
@@ -87,11 +96,9 @@ export function PacketTraceDiagram({
               : undefined
           }
         >
-          <strong className="clamp-2" title={eventId}>
-            {eventId}
-          </strong>
-          <small className="clamp-2" title={event?.task_type || undefined}>
-            {event?.task_type || "recorded decision"}
+          <strong title={eventId}>{shortenId(eventId)}</strong>
+          <small title={event?.task_type || undefined}>
+            <Truncate>{event?.task_type || "recorded decision"}</Truncate>
           </small>
         </FlowNode>
 
@@ -112,17 +119,20 @@ export function PacketTraceDiagram({
                       onJumpToBehavior(id);
                     }}
                   >
-                    {id}
+                    {shortenId(id, 22)}
                   </button>
                 ) : (
                   <span key={id} className="flow-rule-chip" title={id}>
-                    {id}
+                    {shortenId(id, 22)}
                   </span>
                 ),
               )}
               {extraRules ? (
-                <span className="flow-rule-more" title={`${extraRules} more`}>
-                  +{extraRules}
+                <span
+                  className="flow-rule-more"
+                  title={ruleIds.slice(2).join(", ")}
+                >
+                  +{extraRules} more
                 </span>
               ) : null}
             </div>

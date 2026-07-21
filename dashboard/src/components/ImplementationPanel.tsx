@@ -1,11 +1,12 @@
 import { useEffect, useMemo, type ReactNode } from "react";
-import { fileKey, fmt, fmtWhen, ruleText } from "../lib/format";
+import { fileKey, fmt, fmtWhen, ruleBlockLines, ruleText } from "../lib/format";
 import type { Backlink, Packet, Snapshot } from "../types";
 import { useCodePreview } from "../hooks/useCodePreview";
 import {
   Empty,
   ExternalLink,
   PathText,
+  ProseBlock,
   SectionLabel,
   StatusPill,
   Truncate,
@@ -48,6 +49,10 @@ function RuleDetail({ packet, ruleId }: { packet: Packet; ruleId: string }) {
   const status =
     coverage?.status || (links.length ? "linked" : "unlinked");
   const definedIn = `${packet.source_dir || `spec/packets/${packet.slug}`}/spec.md`;
+  const ruleLines = ruleBlockLines(packet.spec, ruleId);
+  const acceptanceLines = ruleBlockLines(packet.acceptance, ruleId, true);
+  const ruleFallback = ruleText(packet.spec, ruleId);
+  const acceptanceFallback = ruleText(packet.acceptance, ruleId, true);
 
   return (
     <div className="rule-detail">
@@ -57,24 +62,25 @@ function RuleDetail({ packet, ruleId }: { packet: Packet; ruleId: string }) {
         </h3>
         <StatusPill status={status} />
       </div>
-      <p className="rule-copy clamp-4" title={ruleText(packet.spec, ruleId)}>
-        {ruleText(packet.spec, ruleId)}
-      </p>
-      <div className="detail-grid">
-        <div className="detail-item detail-item-wide">
+      {ruleLines.length ? (
+        <ProseBlock lines={ruleLines} className="rule-copy" />
+      ) : (
+        <p className="rule-copy">{ruleFallback}</p>
+      )}
+      <div className="detail-stack">
+        <div className="detail-item">
           <small>Acceptance</small>
-          <span
-            className="clamp-3"
-            title={ruleText(packet.acceptance, ruleId, true)}
-          >
-            {ruleText(packet.acceptance, ruleId, true)}
-          </span>
+          {acceptanceLines.length ? (
+            <ProseBlock lines={acceptanceLines} />
+          ) : (
+            <span>{acceptanceFallback}</span>
+          )}
         </div>
         <div className="detail-item">
           <small>Defined in</small>
           <PathText path={definedIn} />
         </div>
-        <div className="detail-item detail-item-wide">
+        <div className="detail-item">
           <small>Backlinks</small>
           {links.length ? (
             <ul className="mono-list">
@@ -83,7 +89,7 @@ function RuleDetail({ packet, ruleId }: { packet: Packet; ruleId: string }) {
                   link.hash_ok === false ? " (stale hash)" : ""
                 }`;
                 return (
-                  <li key={`${link.path}:${link.line ?? ""}`} title={label}>
+                  <li key={`${link.path}:${link.line ?? ""}`}>
                     <PathText path={label} />
                   </li>
                 );
@@ -93,7 +99,7 @@ function RuleDetail({ packet, ruleId }: { packet: Packet; ruleId: string }) {
             <span>No backlink recorded</span>
           )}
         </div>
-        <div className="detail-item detail-item-wide">
+        <div className="detail-item">
           <small>Evolution events</small>
           {packet.events.length ? (
             <ul className="mono-list">

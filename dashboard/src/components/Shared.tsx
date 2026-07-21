@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { shortenPath } from "../lib/format";
 
 export function ExternalLink({
   href,
@@ -34,18 +35,46 @@ export function Truncate({
   );
 }
 
-/** Paths/IDs: prefer breaking at separators; still truncate if needed. */
+/**
+ * File paths: one line with ellipsis (optionally shortened middle),
+ * never mid-word wrap. Full path always on hover.
+ */
 export function PathText({
   path,
   className = "",
+  shorten = true,
 }: {
   path: string;
   className?: string;
+  shorten?: boolean;
 }) {
+  const display = shorten ? shortenPath(path) : path;
   return (
     <span className={`path-text ${className}`.trim()} title={path}>
-      {path}
+      {display}
     </span>
+  );
+}
+
+/** Multi-line prose with clear paragraph breaks. */
+export function ProseBlock({
+  lines,
+  className = "",
+}: {
+  lines: string[];
+  className?: string;
+}) {
+  if (!lines.length) return null;
+  return (
+    <div className={`prose-block ${className}`.trim()}>
+      {lines.map((line, index) =>
+        line ? (
+          <p key={`${index}-${line.slice(0, 24)}`}>{line}</p>
+        ) : (
+          <div className="prose-gap" key={`gap-${index}`} />
+        ),
+      )}
+    </div>
   );
 }
 

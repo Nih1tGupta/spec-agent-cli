@@ -91,58 +91,49 @@ export function DriftPanel({
       </SectionLabel>
       <div className="side-card">
         {grouped.length ? (
-          <div className="scroll-pane scroll-pane-tall issue-scroll">
-            <table className="issue-table">
-              <thead>
-                <tr>
-                  <th className="col-kind">Kind</th>
-                  <th className="col-behaviors">Behaviors</th>
-                  <th className="col-location">Location</th>
-                  <th className="col-message">Message</th>
-                </tr>
-              </thead>
-              <tbody>
-                {grouped.map((issue) => (
-                  <tr
-                    key={`${issue.kind}|${issue.location}|${issue.message}`}
-                  >
-                    <td className="mono col-kind">
-                      <Truncate>{issue.kind}</Truncate>
-                    </td>
-                    <td className="col-behaviors">
-                      <div className="behavior-chip-row">
-                        {(issue.behavior_ids.length
-                          ? issue.behavior_ids
-                          : ["—"]
-                        ).map((id) =>
-                          id === "—" ? (
-                            <span className="mono" key={id}>
-                              {id}
-                            </span>
-                          ) : (
-                            <button
-                              key={id}
-                              type="button"
-                              className="behavior-chip"
-                              title={id}
-                              onClick={() => onJumpToBehavior(id)}
-                            >
-                              {id}
-                            </button>
-                          ),
-                        )}
-                      </div>
-                    </td>
-                    <td className="mono col-location">
-                      <PathText path={issue.location || "—"} />
-                    </td>
-                    <td className="col-message" title={issue.message}>
-                      <span className="clamp-3">{issue.message}</span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="scroll-pane scroll-pane-tall issue-card-list">
+            {grouped.map((issue) => (
+              <article
+                className="issue-card"
+                key={`${issue.kind}|${issue.location}|${issue.message}`}
+              >
+                <header className="issue-card-head">
+                  <span className="issue-kind mono">{issue.kind}</span>
+                  <p className="issue-message">{issue.message}</p>
+                </header>
+                {issue.location ? (
+                  <div className="issue-meta">
+                    <small>Location</small>
+                    <PathText path={issue.location} />
+                  </div>
+                ) : null}
+                <div className="issue-meta">
+                  <small>Behaviors</small>
+                  <div className="behavior-chip-row">
+                    {(issue.behavior_ids.length
+                      ? issue.behavior_ids
+                      : ["—"]
+                    ).map((id) =>
+                      id === "—" ? (
+                        <span className="mono" key={id}>
+                          {id}
+                        </span>
+                      ) : (
+                        <button
+                          key={id}
+                          type="button"
+                          className="behavior-chip"
+                          title={id}
+                          onClick={() => onJumpToBehavior(id)}
+                        >
+                          {id}
+                        </button>
+                      ),
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         ) : (
           <Empty>No structural drift detected.</Empty>

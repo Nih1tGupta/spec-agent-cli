@@ -205,10 +205,85 @@
     .path-text {
       display: block;
       min-width: 0;
+      max-width: 100%;
       font: 400 12px/1.45 var(--mono);
       color: var(--ink-soft);
-      overflow-wrap: anywhere;
-      word-break: break-word;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      word-break: normal;
+      overflow-wrap: normal;
+    }
+
+    .prose-block {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+    .prose-block p {
+      margin: 0;
+      color: var(--ink-soft);
+      font: 400 13px/1.55 var(--font);
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+    .prose-gap {
+      height: 4px;
+    }
+    .detail-stack {
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+    .detail-stack .detail-item {
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+    .issue-card-list {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+    .issue-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 12px 14px;
+      min-width: 0;
+    }
+    .issue-card-head {
+      display: grid;
+      gap: 6px;
+      margin-bottom: 10px;
+      min-width: 0;
+    }
+    .issue-kind {
+      display: inline-flex;
+      align-self: start;
+      border: 1px solid var(--line-strong);
+      border-radius: 3px;
+      padding: 3px 7px;
+      font: 500 11px/1.2 var(--mono);
+      color: var(--ink-soft);
+      background: var(--surface-raised);
+    }
+    .issue-message {
+      margin: 0;
+      color: var(--ink);
+      font: 400 13px/1.5 var(--font);
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+    .issue-meta {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+      margin-top: 8px;
+    }
+    .issue-meta small {
+      color: var(--faint);
+      font-size: 11px;
+      font-weight: 500;
     }
 
     .clamp-2,
@@ -499,8 +574,10 @@
       cursor: pointer;
       font: 400 11px/1.2 var(--mono);
       letter-spacing: -0.01em;
-      max-width: min(100%, 280px);
+      width: 100%;
+      max-width: 100%;
       min-width: 0;
+      text-align: left;
       transition: border-color 100ms ease, color 100ms ease, background 100ms ease;
     }
 
@@ -564,6 +641,14 @@
       line-height: 1.55;
       margin: 0 0 14px;
     }
+    .rule-detail .prose-block.rule-copy {
+      margin: 0 0 14px;
+      max-height: 160px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding-right: 2px;
+    }
+
 
     .detail-grid {
       display: grid;
@@ -945,8 +1030,7 @@
       background: var(--surface);
       padding: 10px 11px;
       min-width: 0;
-      min-height: 108px;
-      height: 100%;
+      height: 124px;
       overflow: hidden;
       box-shadow: 0 1px 0 rgba(16, 24, 40, 0.03);
     }
@@ -992,31 +1076,34 @@
       display: block;
       font: 500 12px/1.35 var(--mono);
       color: var(--ink);
-      overflow-wrap: anywhere;
-      word-break: break-word;
       min-width: 0;
-    }
-
-    .flow-node-body strong.clamp-2 {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
       overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .flow-node-body small {
       display: block;
       margin-top: 4px;
+      min-width: 0;
+      overflow: hidden;
       color: var(--muted);
       font-size: 11px;
       line-height: 1.35;
     }
 
+    .flow-node-body .truncate {
+      font: inherit;
+      color: inherit;
+    }
+
     .flow-rule-stack {
       display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      align-items: center;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 4px;
+      align-items: stretch;
+      min-width: 0;
     }
 
     .flow-rule-chip {
@@ -1027,7 +1114,9 @@
       padding: 3px 7px;
       font: 500 11px/1.2 var(--mono);
       cursor: pointer;
+      width: 100%;
       max-width: 100%;
+      text-align: left;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
