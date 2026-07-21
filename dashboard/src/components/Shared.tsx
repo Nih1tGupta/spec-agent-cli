@@ -15,6 +15,40 @@ export function ExternalLink({
   );
 }
 
+/** Single-line truncation; full value available via native tooltip. */
+export function Truncate({
+  children,
+  title,
+  className = "",
+}: {
+  children: ReactNode;
+  title?: string;
+  className?: string;
+}) {
+  const tip =
+    title ?? (typeof children === "string" ? children : undefined);
+  return (
+    <span className={`truncate ${className}`.trim()} title={tip}>
+      {children}
+    </span>
+  );
+}
+
+/** Paths/IDs: prefer breaking at separators; still truncate if needed. */
+export function PathText({
+  path,
+  className = "",
+}: {
+  path: string;
+  className?: string;
+}) {
+  return (
+    <span className={`path-text ${className}`.trim()} title={path}>
+      {path}
+    </span>
+  );
+}
+
 export function WarnBanner({
   title,
   items,

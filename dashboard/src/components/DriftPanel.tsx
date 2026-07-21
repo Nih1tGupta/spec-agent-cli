@@ -1,7 +1,14 @@
 import { useMemo } from "react";
 import { groupDriftIssues, uniqueByKey } from "../lib/format";
 import type { Snapshot } from "../types";
-import { Empty, ExternalLink, SectionLabel, WarnBanner } from "./Shared";
+import {
+  Empty,
+  ExternalLink,
+  PathText,
+  SectionLabel,
+  Truncate,
+  WarnBanner,
+} from "./Shared";
 
 export function DriftPanel({
   data,
@@ -16,7 +23,10 @@ export function DriftPanel({
   );
   const changes = useMemo(
     () =>
-      uniqueByKey(data.recent_changes || [], (change) => change.full_id || change.id),
+      uniqueByKey(
+        data.recent_changes || [],
+        (change) => change.full_id || change.id,
+      ),
     [data.recent_changes],
   );
   const rawCount = (data.drift.issues || []).length;
@@ -81,14 +91,14 @@ export function DriftPanel({
       </SectionLabel>
       <div className="side-card">
         {grouped.length ? (
-          <div className="scroll-pane scroll-pane-tall">
+          <div className="scroll-pane scroll-pane-tall issue-scroll">
             <table className="issue-table">
               <thead>
                 <tr>
-                  <th>Kind</th>
-                  <th>Behaviors</th>
-                  <th>Location</th>
-                  <th>Message</th>
+                  <th className="col-kind">Kind</th>
+                  <th className="col-behaviors">Behaviors</th>
+                  <th className="col-location">Location</th>
+                  <th className="col-message">Message</th>
                 </tr>
               </thead>
               <tbody>
@@ -96,8 +106,10 @@ export function DriftPanel({
                   <tr
                     key={`${issue.kind}|${issue.location}|${issue.message}`}
                   >
-                    <td className="mono">{issue.kind}</td>
-                    <td>
+                    <td className="mono col-kind">
+                      <Truncate>{issue.kind}</Truncate>
+                    </td>
+                    <td className="col-behaviors">
                       <div className="behavior-chip-row">
                         {(issue.behavior_ids.length
                           ? issue.behavior_ids
@@ -112,6 +124,7 @@ export function DriftPanel({
                               key={id}
                               type="button"
                               className="behavior-chip"
+                              title={id}
                               onClick={() => onJumpToBehavior(id)}
                             >
                               {id}
@@ -120,8 +133,12 @@ export function DriftPanel({
                         )}
                       </div>
                     </td>
-                    <td className="mono">{issue.location || "—"}</td>
-                    <td>{issue.message}</td>
+                    <td className="mono col-location">
+                      <PathText path={issue.location || "—"} />
+                    </td>
+                    <td className="col-message" title={issue.message}>
+                      <span className="clamp-3">{issue.message}</span>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -144,7 +161,7 @@ export function DriftPanel({
           {changes.length ? (
             changes.map((change) => (
               <div className="change-row" key={change.full_id || change.id}>
-                <div>
+                <div className="change-sha">
                   {change.url ? (
                     <a
                       className="sha"
@@ -172,8 +189,13 @@ export function DriftPanel({
                     </>
                   ) : null}
                 </div>
-                <div className="subject">{change.subject}</div>
-                <div className="who">
+                <div className="subject" title={change.subject}>
+                  <Truncate>{change.subject}</Truncate>
+                </div>
+                <div
+                  className="who"
+                  title={`${change.author || ""} · ${change.date || ""}`}
+                >
                   {change.author || ""} · {change.date || ""}
                 </div>
               </div>

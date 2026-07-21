@@ -70,7 +70,9 @@ export function PacketTraceDiagram({
       <div className="flow-rail">
         <FlowNode kind="authored" label="Authored">
           <strong>spec.md</strong>
-          <small>{packet?.source_dir || "specification packet"}</small>
+          <small className="clamp-2" title={packet?.source_dir || undefined}>
+            {packet?.source_dir || "specification packet"}
+          </small>
         </FlowNode>
 
         <FlowArrow />
@@ -85,8 +87,12 @@ export function PacketTraceDiagram({
               : undefined
           }
         >
-          <strong title={eventId}>{eventId}</strong>
-          <small>{event?.task_type || "recorded decision"}</small>
+          <strong className="clamp-2" title={eventId}>
+            {eventId}
+          </strong>
+          <small className="clamp-2" title={event?.task_type || undefined}>
+            {event?.task_type || "recorded decision"}
+          </small>
         </FlowNode>
 
         <FlowArrow />
@@ -100,6 +106,7 @@ export function PacketTraceDiagram({
                     key={id}
                     type="button"
                     className="flow-rule-chip"
+                    title={id}
                     onClick={(e) => {
                       e.stopPropagation();
                       onJumpToBehavior(id);
@@ -108,13 +115,15 @@ export function PacketTraceDiagram({
                     {id}
                   </button>
                 ) : (
-                  <span key={id} className="flow-rule-chip">
+                  <span key={id} className="flow-rule-chip" title={id}>
                     {id}
                   </span>
                 ),
               )}
               {extraRules ? (
-                <span className="flow-rule-more">+{extraRules}</span>
+                <span className="flow-rule-more" title={`${extraRules} more`}>
+                  +{extraRules}
+                </span>
               ) : null}
             </div>
           ) : (

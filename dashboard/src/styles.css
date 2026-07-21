@@ -181,15 +181,60 @@
       min-height: calc(100vh - var(--header-h) - var(--subnav-h));
       overflow: auto;
       padding: 20px clamp(16px, 3vw, 40px) 32px;
-      max-width: 1080px;
+      max-width: min(1200px, 100%);
+      width: 100%;
       margin: 0 auto;
     }
 
     .panel.view-active { display: block; }
 
     .right-panel {
-      max-width: 1120px;
+      max-width: min(1240px, 100%);
       background: transparent;
+    }
+
+    /* Content-aware text helpers */
+    .truncate {
+      display: block;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .path-text {
+      display: block;
+      min-width: 0;
+      font: 400 12px/1.45 var(--mono);
+      color: var(--ink-soft);
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .clamp-2,
+    .clamp-3,
+    .clamp-4 {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      overflow-wrap: anywhere;
+    }
+    .clamp-2 { -webkit-line-clamp: 2; }
+    .clamp-3 { -webkit-line-clamp: 3; }
+    .clamp-4 { -webkit-line-clamp: 4; }
+
+    .mono-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+    .mono-list li {
+      min-width: 0;
+      font: 400 12px/1.4 var(--mono);
+      color: var(--ink-soft);
     }
 
     /* ── Type ───────────────────────────────────────────── */
@@ -434,6 +479,15 @@
       flex-wrap: wrap;
       gap: 5px;
       margin-bottom: var(--space-2);
+      min-width: 0;
+    }
+
+    .rule-row-scroll {
+      max-height: 88px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding-right: 2px;
+      scrollbar-gutter: stable;
     }
 
     .rule-anchor {
@@ -445,7 +499,16 @@
       cursor: pointer;
       font: 400 11px/1.2 var(--mono);
       letter-spacing: -0.01em;
+      max-width: min(100%, 280px);
+      min-width: 0;
       transition: border-color 100ms ease, color 100ms ease, background 100ms ease;
+    }
+
+    .rule-anchor-label {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .rule-anchor:hover {
@@ -470,6 +533,8 @@
       border-radius: var(--radius);
       padding: 14px 14px 12px;
       margin: 0 0 var(--space-3);
+      min-width: 0;
+      overflow: hidden;
     }
 
     .rule-detail-head {
@@ -478,6 +543,7 @@
       align-items: center;
       gap: var(--space-3);
       margin-bottom: 10px;
+      min-width: 0;
     }
 
     .rule-detail h3 {
@@ -486,9 +552,13 @@
       font-family: var(--mono);
       font-weight: 500;
       letter-spacing: -0.015em;
+      min-width: 0;
+      flex: 1;
+      margin: 0;
     }
 
-    .rule-detail > p {
+    .rule-detail > p,
+    .rule-detail .rule-copy {
       color: var(--ink-soft);
       font-size: 13px;
       line-height: 1.55;
@@ -497,7 +567,7 @@
 
     .detail-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 14px 20px;
     }
 
@@ -505,6 +575,10 @@
       border-top: 1px solid var(--line);
       padding-top: 8px;
       min-width: 0;
+    }
+
+    .detail-item-wide {
+      grid-column: 1 / -1;
     }
 
     .detail-item small {
@@ -522,12 +596,17 @@
       color: var(--ink-soft);
       font: 400 12px/1.45 var(--mono);
       overflow-wrap: anywhere;
+      min-width: 0;
     }
 
     .file-list {
       display: grid;
       gap: 3px;
       margin-bottom: var(--space-3);
+      max-height: 148px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      min-width: 0;
     }
 
     .file-button {
@@ -540,7 +619,17 @@
       cursor: pointer;
       font: 400 12px/1.4 var(--mono);
       position: relative;
+      width: 100%;
+      min-width: 0;
+      overflow: hidden;
       transition: border-color 100ms ease, background 100ms ease, color 100ms ease;
+    }
+
+    .file-button-path {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .file-button::before {
@@ -834,15 +923,16 @@
       background:
         linear-gradient(180deg, #fbfcfb 0%, var(--surface) 100%);
       padding: 16px 14px;
-      overflow-x: auto;
+      overflow: hidden;
+      min-width: 0;
     }
 
     .flow-rail {
       display: grid;
-      grid-template-columns: minmax(120px, 1fr) 28px minmax(140px, 1.15fr) 28px minmax(120px, 1fr) 28px minmax(120px, 1fr);
+      grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1.15fr) 24px minmax(0, 1fr) 24px minmax(0, 1fr);
       gap: 6px;
       align-items: stretch;
-      min-width: 640px;
+      min-width: 0;
     }
 
     .flow-node {
@@ -855,6 +945,9 @@
       background: var(--surface);
       padding: 10px 11px;
       min-width: 0;
+      min-height: 108px;
+      height: 100%;
+      overflow: hidden;
       box-shadow: 0 1px 0 rgba(16, 24, 40, 0.03);
     }
 
@@ -899,7 +992,16 @@
       display: block;
       font: 500 12px/1.35 var(--mono);
       color: var(--ink);
+      overflow-wrap: anywhere;
       word-break: break-word;
+      min-width: 0;
+    }
+
+    .flow-node-body strong.clamp-2 {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
     }
 
     .flow-node-body small {
@@ -925,6 +1027,10 @@
       padding: 3px 7px;
       font: 500 11px/1.2 var(--mono);
       cursor: pointer;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     span.flow-rule-chip {
@@ -1038,13 +1144,19 @@
     .meta-strip {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px 20px;
+      gap: 8px 16px;
       margin: 0 0 4px;
       padding: 8px 0;
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
       font-size: 12px;
       color: var(--muted);
+      min-width: 0;
+    }
+    .meta-strip > span {
+      min-width: 0;
+      max-width: 100%;
+      overflow-wrap: anywhere;
     }
     .meta-strip b {
       color: var(--ink-soft);
@@ -1118,14 +1230,30 @@
       color: var(--ink);
       margin-bottom: 4px;
       letter-spacing: -0.02em;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
     .event-drawer .drawer-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 8px;
+      align-items: baseline;
       color: var(--muted);
       font-size: 11px;
       font-family: var(--mono);
       margin-bottom: 14px;
       padding-bottom: 12px;
       border-bottom: 1px solid var(--line);
+      min-width: 0;
+    }
+    .event-drawer .drawer-meta .event-id {
+      max-width: min(100%, 42ch);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .drawer-meta-sep {
+      color: var(--faint);
     }
     .drawer-grid {
       display: grid;
@@ -1161,9 +1289,17 @@
     }
     .id-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 5px;
       margin-top: 2px;
+      min-width: 0;
+    }
+    .id-grid-scroll {
+      max-height: 160px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding-right: 2px;
+      scrollbar-gutter: stable;
     }
     .id-grid .pill {
       display: block;
@@ -1177,9 +1313,7 @@
       border-color: var(--accent-line);
       color: var(--accent);
       font-weight: 500;
-    }
-    @media (max-width: 860px) {
-      .id-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      min-width: 0;
     }
 
     .change-list { display: grid; gap: 0; }
@@ -1229,14 +1363,16 @@
     }
     .change-row {
       display: grid;
-      grid-template-columns: 72px 1fr auto;
+      grid-template-columns: minmax(64px, 88px) minmax(0, 1fr) minmax(0, 160px);
       gap: 12px;
       align-items: baseline;
       padding: 10px 0;
       border-bottom: 1px solid var(--line);
       font-size: 12px;
+      min-width: 0;
     }
     .change-row:last-child { border-bottom: 0; }
+    .change-row .change-sha { min-width: 0; }
     .change-row .sha {
       font-family: var(--mono);
       font-size: 11px;
@@ -1244,15 +1380,44 @@
       text-decoration: none;
     }
     .change-row .sha:hover { text-decoration: underline; text-underline-offset: 2px; }
-    .change-row .subject { color: var(--ink-soft); }
-    .change-row .who { color: var(--faint); font-size: 11px; white-space: nowrap; }
+    .change-row .subject {
+      color: var(--ink-soft);
+      min-width: 0;
+    }
+    .change-row .who {
+      color: var(--faint);
+      font-size: 11px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: right;
+      min-width: 0;
+    }
 
-    .issue-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .issue-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      table-layout: fixed;
+    }
     .issue-table th, .issue-table td {
       text-align: left;
       padding: 10px 8px;
       border-bottom: 1px solid var(--line);
       vertical-align: top;
+      min-width: 0;
+    }
+    .issue-table .col-kind { width: 18%; }
+    .issue-table .col-behaviors { width: 34%; }
+    .issue-table .col-location { width: 24%; }
+    .issue-table .col-message { width: 24%; }
+    .behavior-chip {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .issue-scroll {
+      overflow-x: auto;
     }
     .issue-table th {
       font-size: 11px;
@@ -1279,7 +1444,40 @@
       text-underline-offset: 2px;
     }
 
+    .code-toolbar-path {
+      min-width: 0;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .impl-side {
+      min-width: 0;
+    }
+    .history-item {
+      min-width: 0;
+    }
+    .history-item strong {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .event-card strong,
+    .event-card small {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .event-card small {
+      white-space: nowrap;
+    }
+
     @media (max-width: 860px) {
       .drawer-grid { grid-template-columns: 1fr; }
-      .change-row { grid-template-columns: 1fr; gap: 4px; }
+      .change-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+      .change-row .who { text-align: left; }
+      .flow-diagram { overflow-x: visible; }
     }

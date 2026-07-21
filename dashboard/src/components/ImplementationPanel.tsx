@@ -2,7 +2,14 @@ import { useEffect, useMemo, type ReactNode } from "react";
 import { fileKey, fmt, fmtWhen, ruleText } from "../lib/format";
 import type { Backlink, Packet, Snapshot } from "../types";
 import { useCodePreview } from "../hooks/useCodePreview";
-import { Empty, ExternalLink, SectionLabel, StatusPill } from "./Shared";
+import {
+  Empty,
+  ExternalLink,
+  PathText,
+  SectionLabel,
+  StatusPill,
+  Truncate,
+} from "./Shared";
 
 function ProvenanceStrip({ packet }: { packet: Packet }) {
   const spec = packet.provenance?.spec;
@@ -40,47 +47,65 @@ function RuleDetail({ packet, ruleId }: { packet: Packet; ruleId: string }) {
   );
   const status =
     coverage?.status || (links.length ? "linked" : "unlinked");
+  const definedIn = `${packet.source_dir || `spec/packets/${packet.slug}`}/spec.md`;
 
   return (
     <div className="rule-detail">
       <div className="rule-detail-head">
-        <h3>{ruleId}</h3>
+        <h3 title={ruleId}>
+          <Truncate>{ruleId}</Truncate>
+        </h3>
         <StatusPill status={status} />
       </div>
-      <p>{ruleText(packet.spec, ruleId)}</p>
+      <p className="rule-copy clamp-4" title={ruleText(packet.spec, ruleId)}>
+        {ruleText(packet.spec, ruleId)}
+      </p>
       <div className="detail-grid">
-        <div className="detail-item">
+        <div className="detail-item detail-item-wide">
           <small>Acceptance</small>
-          <span>{ruleText(packet.acceptance, ruleId, true)}</span>
+          <span
+            className="clamp-3"
+            title={ruleText(packet.acceptance, ruleId, true)}
+          >
+            {ruleText(packet.acceptance, ruleId, true)}
+          </span>
         </div>
         <div className="detail-item">
           <small>Defined in</small>
-          <span>
-            {packet.source_dir || `spec/packets/${packet.slug}`}/spec.md
-          </span>
+          <PathText path={definedIn} />
         </div>
-        <div className="detail-item">
+        <div className="detail-item detail-item-wide">
           <small>Backlinks</small>
-          <span>
-            {links.length
-              ? links
-                  .map(
-                    (link) =>
-                      `${link.path}${link.line ? `:${link.line}` : ""}${
-                        link.hash_ok === false ? " (stale hash)" : ""
-                      }`,
-                  )
-                  .join(", ")
-              : "No backlink recorded"}
-          </span>
+          {links.length ? (
+            <ul className="mono-list">
+              {links.map((link) => {
+                const label = `${link.path}${link.line ? `:${link.line}` : ""}${
+                  link.hash_ok === false ? " (stale hash)" : ""
+                }`;
+                return (
+                  <li key={`${link.path}:${link.line ?? ""}`} title={label}>
+                    <PathText path={label} />
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <span>No backlink recorded</span>
+          )}
         </div>
-        <div className="detail-item">
+        <div className="detail-item detail-item-wide">
           <small>Evolution events</small>
-          <span>
-            {packet.events.length
-              ? packet.events.join(", ")
-              : "No linked event"}
-          </span>
+          {packet.events.length ? (
+            <ul className="mono-list">
+              {packet.events.map((id) => (
+                <li key={id} title={id}>
+                  <Truncate>{id}</Truncate>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <span>No linked event</span>
+          )}
         </div>
       </div>
     </div>
@@ -121,7 +146,9 @@ function CodeWindow({
   return (
     <div className="code-window">
       <div className="code-toolbar">
-        <span>{model.path}</span>
+        <span className="code-toolbar-path" title={model.path}>
+          {model.path}
+        </span>
         <em>
           line {model.hitLine}
           {model.lineHint != null ? ` · index line ${model.lineHint}` : ""}
@@ -238,16 +265,19 @@ export function ImplementationPanel({
       </div>
 
       <SectionLabel count={packet.behavior_ids.length}>Rules</SectionLabel>
-      <div className="rule-row">
+      <div
+        className={`rule-row${packet.behavior_ids.length > 12 ? " rule-row-scroll" : ""}`}
+      >
         {packet.behavior_ids.length ? (
           packet.behavior_ids.map((id) => (
             <button
               key={id}
               type="button"
               className={`rule-anchor ${id === activeRule ? "active" : ""}`}
+              title={id}
               onClick={() => onToggleRule(id)}
             >
-              {id}
+              <span className="rule-anchor-label">{id}</span>
             </button>
           ))
         ) : (
@@ -280,9 +310,10 @@ export function ImplementationPanel({
                     className={`file-button ${file === key ? "active" : ""} ${
                       stale ? "stale" : ""
                     }`}
+                    title={label}
                     onClick={() => onSelectFile(key)}
                   >
-                    {label}
+                    <span className="file-button-path">{label}</span>
                     <span className="file-meta">
                       {stale
                         ? "Stale hash"

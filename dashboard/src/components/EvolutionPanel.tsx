@@ -2,14 +2,16 @@ import { useMemo } from "react";
 import { fmt, fmtWhen, uniqueByKey } from "../lib/format";
 import type { EvolutionEvent, Packet, Snapshot } from "../types";
 import { PacketTraceDiagram } from "./PacketTraceDiagram";
-import { Empty, ExternalLink } from "./Shared";
+import { Empty, ExternalLink, PathText, Truncate } from "./Shared";
 
 function EventDrawer({ event }: { event: EvolutionEvent | null }) {
   if (!event) return <Empty>Select an evolution event.</Empty>;
 
-  const files = (event.spec_files || []).join("\n") || "—";
+  const files = event.spec_files || [];
   const rules = (event.behavior_ids || []).length ? (
-    <div className="id-grid">
+    <div
+      className={`id-grid${(event.behavior_ids || []).length > 12 ? " id-grid-scroll" : ""}`}
+    >
       {(event.behavior_ids || []).map((id) => (
         <span className="pill linked" title={id} key={id}>
           {id}
@@ -22,15 +24,17 @@ function EventDrawer({ event }: { event: EvolutionEvent | null }) {
 
   return (
     <div className="event-drawer">
-      <h3>{event.title || event.id}</h3>
+      <h3 title={event.title || event.id}>{event.title || event.id}</h3>
       <div className="drawer-meta">
-        <span className="event-id">{event.id || "event"}</span>
-        {" · "}
-        {fmtWhen(event.timestamp)}
-        {" · "}
-        {event.task_type || "decision"}
-        {" · "}
-        {event.status || "recorded"}
+        <span className="event-id" title={event.id || "event"}>
+          {event.id || "event"}
+        </span>
+        <span className="drawer-meta-sep">·</span>
+        <span>{fmtWhen(event.timestamp)}</span>
+        <span className="drawer-meta-sep">·</span>
+        <span>{event.task_type || "decision"}</span>
+        <span className="drawer-meta-sep">·</span>
+        <span>{event.status || "recorded"}</span>
       </div>
       <div className="drawer-grid scroll-pane scroll-pane-drawer">
         <div className="drawer-item">
@@ -39,7 +43,9 @@ function EventDrawer({ event }: { event: EvolutionEvent | null }) {
         </div>
         <div className="drawer-item">
           <small>Supersedes</small>
-          <span>{event.supersedes || "none"}</span>
+          <span title={event.supersedes || "none"}>
+            <Truncate>{event.supersedes || "none"}</Truncate>
+          </span>
         </div>
         <div className="drawer-item wide">
           <small>User intent</small>
@@ -67,9 +73,17 @@ function EventDrawer({ event }: { event: EvolutionEvent | null }) {
         </div>
         <div className="drawer-item wide">
           <small>Spec files</small>
-          <span className="mono-block" style={{ whiteSpace: "pre-wrap" }}>
-            {files}
-          </span>
+          {files.length ? (
+            <ul className="mono-list">
+              {files.map((file) => (
+                <li key={file}>
+                  <PathText path={file} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <span>—</span>
+          )}
         </div>
         <div className="drawer-item wide">
           <small>Behavior IDs</small>
