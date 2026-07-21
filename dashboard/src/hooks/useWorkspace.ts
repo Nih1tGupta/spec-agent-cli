@@ -120,17 +120,12 @@ export function useWorkspace(data: Snapshot | null) {
 
   const jumpToBehavior = useCallback(
     (behaviorId: string) => {
-      if (!data) {
-        setWorkspace((prev) => ({ ...prev, view: "implementation" }));
-        return;
-      }
+      if (!data) return;
       const packet = data.packets.find((item) =>
         item.behavior_ids.includes(behaviorId),
       );
-      if (!packet) {
-        setWorkspace((prev) => ({ ...prev, view: "implementation" }));
-        return;
-      }
+      // Only navigate when the rule exists in some packet's Implementation view.
+      if (!packet) return;
       setWorkspace((prev) => ({
         ...prev,
         selected: packet.slug,
@@ -142,6 +137,14 @@ export function useWorkspace(data: Snapshot | null) {
     [data],
   );
 
+  const knownBehaviorIds = useMemo(() => {
+    const ids = new Set<string>();
+    for (const packet of data?.packets || []) {
+      for (const id of packet.behavior_ids || []) ids.add(id);
+    }
+    return ids;
+  }, [data]);
+
   return {
     workspace,
     selectedPacket,
@@ -152,5 +155,6 @@ export function useWorkspace(data: Snapshot | null) {
     toggleRule,
     setFile,
     jumpToBehavior,
+    knownBehaviorIds,
   };
 }

@@ -7,6 +7,7 @@ import {
   PathText,
   SectionLabel,
   Truncate,
+  CellTip,
   WarnBanner,
 } from "./Shared";
 
@@ -14,9 +15,11 @@ const RULES_COLLAPSED = 3;
 
 export function DriftPanel({
   data,
+  knownBehaviorIds,
   onJumpToBehavior,
 }: {
   data: Snapshot;
+  knownBehaviorIds: Set<string>;
   onJumpToBehavior: (id: string) => void;
 }) {
   const grouped = useMemo(
@@ -97,7 +100,7 @@ export function DriftPanel({
       <div className="side-card">
         {grouped.length ? (
           <div
-            className="issue-scroll scroll-pane scroll-pane-tall"
+            className="issue-scroll scroll-pane scroll-pane-issues"
             role="region"
             aria-label="Drift issues"
           >
@@ -143,17 +146,27 @@ export function DriftPanel({
                           <div
                             className={`issue-rules${expanded ? " expanded" : ""}`}
                           >
-                            {shown.map((id) => (
-                              <button
-                                key={id}
-                                type="button"
-                                className="behavior-chip"
-                                title={id}
-                                onClick={() => onJumpToBehavior(id)}
-                              >
-                                {id}
-                              </button>
-                            ))}
+                            {shown.map((id) =>
+                              knownBehaviorIds.has(id) ? (
+                                <button
+                                  key={id}
+                                  type="button"
+                                  className="behavior-chip"
+                                  title={`Open ${id} in Implementation`}
+                                  onClick={() => onJumpToBehavior(id)}
+                                >
+                                  {id}
+                                </button>
+                              ) : (
+                                <span
+                                  key={id}
+                                  className="behavior-chip behavior-chip-static"
+                                  title={`${id} is not linked to any packet in Implementation`}
+                                >
+                                  {id}
+                                </span>
+                              ),
+                            )}
                             {hidden > 0 ? (
                               <button
                                 type="button"
@@ -189,7 +202,11 @@ export function DriftPanel({
                         )}
                       </td>
                       <td className="col-message">
-                        <Truncate title={copy.guidance}>{copy.guidance}</Truncate>
+                        <CellTip text={copy.guidance} delayMs={500}>
+                          <span className="truncate issue-table-guidance">
+                            {copy.guidance}
+                          </span>
+                        </CellTip>
                       </td>
                     </tr>
                   );

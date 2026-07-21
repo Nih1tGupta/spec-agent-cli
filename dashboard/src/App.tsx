@@ -19,6 +19,7 @@ export default function App() {
     toggleRule,
     setFile,
     jumpToBehavior,
+    knownBehaviorIds,
   } = useWorkspace(data);
 
   if (loading) {
@@ -78,7 +79,11 @@ export default function App() {
         ) : null}
 
         {view === "drift" ? (
-          <DriftPanel data={data} onJumpToBehavior={jumpToBehavior} />
+          <DriftPanel
+            data={data}
+            knownBehaviorIds={knownBehaviorIds}
+            onJumpToBehavior={jumpToBehavior}
+          />
         ) : null}
 
         {view === "evolution" ? (

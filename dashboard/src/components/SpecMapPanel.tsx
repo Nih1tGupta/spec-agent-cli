@@ -47,7 +47,7 @@ export function SpecMapPanel({
       <div className="section-label">
         Packets <span>{data.packets.length}</span>
       </div>
-      <div className="packet-list">
+      <div className="packet-list packet-list-scroll" role="region" aria-label="Specification packets">
         {data.packets.length ? (
           data.packets.map((packet) => (
             <button
