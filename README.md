@@ -93,6 +93,17 @@ Use `--no-open` in headless environments. The dashboard reads `SPEC.md`, packet
 specifications, acceptance scenarios, evolution events, Git history, drift results,
 and derived traceability without modifying the repository.
 
+The UI is a small React app compiled into static assets and bundled with the CLI, so
+end users do not need Node.js. To change the dashboard during development:
+
+```sh
+cd dashboard
+npm install
+npm run build
+```
+
+Then restart `spec-agent ui`.
+
 ## License
 
 MIT

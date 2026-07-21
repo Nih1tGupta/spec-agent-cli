@@ -74,16 +74,19 @@ def test_snapshot_exposes_packets_events_traceability_and_recent_changes(tmp_pat
     assert snapshot["traceability"]["linked_file_count"] == 1
 
 
-def test_dashboard_contains_three_panels_and_visualization_surfaces() -> None:
+def test_dashboard_contains_react_shell_and_workspace_markers() -> None:
     html = render_dashboard()
 
     for marker in (
-        "packet-panel",
-        "evidence-panel",
-        "visual-panel",
-        "Evolution",
-        "Drift",
-            "Traceability",
-            "event → change → rule",
+        'id="root"',
+        "/assets/",
+        "Spec Agent",
+        "Specification workspace",
     ):
         assert marker in html
+
+    assets = Path(__file__).resolve().parents[1] / "src/spec_agent/ui_assets"
+    assert (assets / "index.html").is_file()
+    assert any(assets.glob("assets/*.js")), "React bundle JS missing"
+    assert any(assets.glob("assets/*.css")), "React bundle CSS missing"
+    assert (assets / "ui_assets/potpie-logo.jpeg").is_file()

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "spec-agent-cli"
-version = "0.3.1"
+version = "0.4.0"
 description = "A strict Spec Agent workflow for spec-driven development"
 readme = "README.md"
 license = { text = "MIT" }
@@ -44,7 +44,7 @@ include = [
     "/.agents/skills",
     "/.claude/skills",
     "/src/spec_agent",
-    "/src/spec_agent/ui_assets",
+    "/dashboard",
     "/tests",
     "/AGENTS.md",
     "/CLAUDE.md",
@@ -52,4 +52,7 @@ include = [
     "/README.md",
     "/LICENSE",
     "/pyproject.toml",
+]
+exclude = [
+    "/dashboard/node_modules",
 ]
