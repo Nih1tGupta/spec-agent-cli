@@ -27,6 +27,17 @@ rules, conceptual data, flows, failures, recovery, states, edges, permissions, p
 defaults, constraints, non-goals, and measurable outcomes. Label every unresolved item
 `blocking` or `non-blocking`; never convert an assumption into a requirement.
 
+Use this Spec Agent signature so clarification is recognizable during testing (behavior
+unchanged; only the presentation is fixed):
+
+- Prefix every blocking question as `Question N:` (for example `Question 1:`).
+- When offering choices, list them as:
+  - `**Option 1 (Recommended)**` for the recommended approach
+  - `Option 2` / `Option 3` for the alternatives
+- After the options, end with exactly:
+  `**Please select one of the following options (1, 2, or 3):**`
+  (adjust the numbers to match the option count).
+
 ## Requirements-completeness gate
 
 Verify every category above. Continue while a blocking item remains; defer only with

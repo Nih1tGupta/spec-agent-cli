@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { groupDriftIssues, uniqueByKey } from "../lib/format";
+import { useMemo, useState } from "react";
+import { driftKindLabel, groupDriftIssues, uniqueByKey } from "../lib/format";
 import type { Snapshot } from "../types";
 import {
   Empty,
@@ -9,6 +9,8 @@ import {
   Truncate,
   WarnBanner,
 } from "./Shared";
+
+const RULES_COLLAPSED = 3;
 
 export function DriftPanel({
   data,
@@ -28,6 +30,9 @@ export function DriftPanel({
         (change) => change.full_id || change.id,
       ),
     [data.recent_changes],
+  );
+  const [expandedRules, setExpandedRules] = useState<Record<string, boolean>>(
+    {},
   );
   const rawCount = (data.drift.issues || []).length;
   const baseline = data.traceability.baseline_commit;
@@ -91,49 +96,106 @@ export function DriftPanel({
       </SectionLabel>
       <div className="side-card">
         {grouped.length ? (
-          <div className="scroll-pane scroll-pane-tall issue-card-list">
-            {grouped.map((issue) => (
-              <article
-                className="issue-card"
-                key={`${issue.kind}|${issue.location}|${issue.message}`}
-              >
-                <header className="issue-card-head">
-                  <span className="issue-kind mono">{issue.kind}</span>
-                  <p className="issue-message">{issue.message}</p>
-                </header>
-                {issue.location ? (
-                  <div className="issue-meta">
-                    <small>Location</small>
-                    <PathText path={issue.location} />
-                  </div>
-                ) : null}
-                <div className="issue-meta">
-                  <small>Behaviors</small>
-                  <div className="behavior-chip-row">
-                    {(issue.behavior_ids.length
-                      ? issue.behavior_ids
-                      : ["—"]
-                    ).map((id) =>
-                      id === "—" ? (
-                        <span className="mono" key={id}>
-                          {id}
-                        </span>
-                      ) : (
-                        <button
-                          key={id}
-                          type="button"
-                          className="behavior-chip"
-                          title={id}
-                          onClick={() => onJumpToBehavior(id)}
+          <div
+            className="issue-scroll scroll-pane scroll-pane-tall"
+            role="region"
+            aria-label="Drift issues"
+          >
+            <table className="issue-table">
+              <thead>
+                <tr>
+                  <th className="col-kind">Issue</th>
+                  <th className="col-location">Location</th>
+                  <th className="col-behaviors">Affected rules</th>
+                  <th className="col-message">What to do</th>
+                </tr>
+              </thead>
+              <tbody>
+                {grouped.map((issue) => {
+                  const copy = driftKindLabel(issue.kind);
+                  const rowKey = `${issue.kind}|${issue.location}|${issue.message}`;
+                  const rules = issue.behavior_ids;
+                  const expanded = Boolean(expandedRules[rowKey]);
+                  const shown = expanded
+                    ? rules
+                    : rules.slice(0, RULES_COLLAPSED);
+                  const hidden = Math.max(0, rules.length - shown.length);
+
+                  return (
+                    <tr key={rowKey}>
+                      <td className="col-kind">
+                        <Truncate
+                          title={`${copy.title} (${issue.kind})`}
+                          className="issue-table-title"
                         >
-                          {id}
-                        </button>
-                      ),
-                    )}
-                  </div>
-                </div>
-              </article>
-            ))}
+                          {copy.title}
+                        </Truncate>
+                      </td>
+                      <td className="col-location">
+                        {issue.location ? (
+                          <PathText path={issue.location} />
+                        ) : (
+                          <span className="muted">—</span>
+                        )}
+                      </td>
+                      <td className="col-behaviors">
+                        {rules.length ? (
+                          <div
+                            className={`issue-rules${expanded ? " expanded" : ""}`}
+                          >
+                            {shown.map((id) => (
+                              <button
+                                key={id}
+                                type="button"
+                                className="behavior-chip"
+                                title={id}
+                                onClick={() => onJumpToBehavior(id)}
+                              >
+                                {id}
+                              </button>
+                            ))}
+                            {hidden > 0 ? (
+                              <button
+                                type="button"
+                                className="behavior-more"
+                                title={rules.slice(RULES_COLLAPSED).join(", ")}
+                                onClick={() =>
+                                  setExpandedRules((prev) => ({
+                                    ...prev,
+                                    [rowKey]: true,
+                                  }))
+                                }
+                              >
+                                +{hidden}
+                              </button>
+                            ) : null}
+                            {expanded && rules.length > RULES_COLLAPSED ? (
+                              <button
+                                type="button"
+                                className="behavior-more"
+                                onClick={() =>
+                                  setExpandedRules((prev) => ({
+                                    ...prev,
+                                    [rowKey]: false,
+                                  }))
+                                }
+                              >
+                                Show less
+                              </button>
+                            ) : null}
+                          </div>
+                        ) : (
+                          <span className="muted">—</span>
+                        )}
+                      </td>
+                      <td className="col-message">
+                        <Truncate title={copy.guidance}>{copy.guidance}</Truncate>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
         ) : (
           <Empty>No structural drift detected.</Empty>

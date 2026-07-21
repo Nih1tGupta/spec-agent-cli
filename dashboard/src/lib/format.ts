@@ -83,6 +83,62 @@ export function ruleText(
   return lines.join("\n");
 }
 
+/** User-facing labels for machine drift kinds (kind string stays in data/API). */
+const DRIFT_KIND_COPY: Record<string, { title: string; guidance: string }> = {
+  "code-changed": {
+    title: "Linked code was updated",
+    guidance:
+      "This file changed since the last baseline. Confirm the specification still matches, then refresh traceability.",
+  },
+  "stale-trace": {
+    title: "Code link went missing",
+    guidance:
+      "A recorded code link moved or disappeared. Restore the backlink, or refresh the baseline after confirming the change.",
+  },
+  unlinked: {
+    title: "Rule has no code link",
+    guidance:
+      "This approved rule is not linked to implementation. Add spec backlinks in code or tests, then refresh traceability.",
+  },
+  phantom: {
+    title: "Code references an unknown rule",
+    guidance:
+      "Code points at a behavior ID that is not in the specification. Fix the backlink ID or add the missing rule.",
+  },
+  unbaselined: {
+    title: "New link not in baseline",
+    guidance:
+      "This backlink is not in the traceability baseline yet. Review it, then refresh traceability.",
+  },
+  "silent-implementation": {
+    title: "Planned rule already in code",
+    guidance:
+      "A planned rule already has implementation backlinks. Confirm product status or remove premature links.",
+  },
+  "dead-ref": {
+    title: "Broken code reference",
+    guidance: "A specification code reference points to a path that no longer exists.",
+  },
+  "stale-verification": {
+    title: "Verification is out of date",
+    guidance:
+      "Linked code changed after the last verification. Re-verify or update the recorded verification.",
+  },
+  unknown: {
+    title: "Drift finding",
+    guidance: "Review this finding against the linked rules and files.",
+  },
+};
+
+export function driftKindLabel(kind: string): { title: string; guidance: string } {
+  return (
+    DRIFT_KIND_COPY[kind] || {
+      title: kind.replace(/-/g, " "),
+      guidance: "Review this finding against the linked rules and files.",
+    }
+  );
+}
+
 export function groupDriftIssues(issues: DriftIssue[]): GroupedDriftIssue[] {
   const groups = new Map<string, GroupedDriftIssue>();
   for (const issue of issues || []) {

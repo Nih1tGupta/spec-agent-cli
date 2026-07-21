@@ -43,7 +43,9 @@ PSH-001: Skill frontmatter MUST contain only matching `name` and trigger-focused
 PSH-002: Request flow MUST explore context and scope before proposing product behavior.
 
 PSH-003: Request flow MUST ask one blocking question at a time and present two or three
-approaches for every material product decision.
+approaches for every material product decision, using the Spec Agent signature
+(`Question N:`, `Option 1 (Recommended)` / `Option 2` / `Option 3`, and
+`Please select one of the following options (1, 2, or 3):`).
 
 PSH-004: Specification writing MUST wait for product-decision approval and MUST evaluate
 all categories in the requirements-completeness gate.

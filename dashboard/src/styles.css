@@ -240,50 +240,85 @@
       padding-top: 10px;
     }
     .issue-card-list {
-      display: grid;
-      gap: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       align-content: start;
     }
     .issue-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: var(--surface);
-      padding: 12px 14px;
+      padding: 14px 16px;
       min-width: 0;
+      overflow: hidden;
     }
-    .issue-card-head {
-      display: grid;
-      gap: 6px;
-      margin-bottom: 10px;
+    .issue-card-top {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
       min-width: 0;
     }
     .issue-kind {
       display: inline-flex;
-      align-self: start;
+      align-items: center;
       border: 1px solid var(--line-strong);
       border-radius: 3px;
-      padding: 3px 7px;
-      font: 500 11px/1.2 var(--mono);
+      padding: 4px 8px;
+      font: 500 12px/1.2 var(--font);
       color: var(--ink-soft);
       background: var(--surface-raised);
+      white-space: nowrap;
     }
-    .issue-message {
+    .issue-summary {
       margin: 0;
       color: var(--ink);
       font: 400 13px/1.5 var(--font);
-      overflow-wrap: break-word;
+      overflow-wrap: anywhere;
       word-break: normal;
+      max-width: 100%;
     }
-    .issue-meta {
-      display: grid;
-      gap: 4px;
+    .issue-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
       min-width: 0;
-      margin-top: 8px;
     }
-    .issue-meta small {
+    .issue-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+    .issue-field-label {
       color: var(--faint);
-      font-size: 11px;
-      font-weight: 500;
+      font: 500 11px/1.2 var(--font);
+    }
+    .issue-rule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+      gap: 6px;
+      max-height: 108px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding-right: 2px;
+      scrollbar-gutter: stable;
+      min-width: 0;
+    }
+    .issue-rule-grid .behavior-chip {
+      width: 100%;
+      max-width: 100%;
+      justify-content: flex-start;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .clamp-2,
@@ -550,15 +585,15 @@
     }
 
     .rule-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+      gap: 6px;
       margin-bottom: var(--space-2);
       min-width: 0;
     }
 
     .rule-row-scroll {
-      max-height: 88px;
+      max-height: 148px;
       overflow-y: auto;
       overscroll-behavior: contain;
       padding-right: 2px;
@@ -570,11 +605,11 @@
       color: var(--ink-soft);
       background: var(--surface);
       border-radius: var(--radius);
-      padding: 5px 8px;
+      padding: 6px 8px;
       cursor: pointer;
       font: 400 11px/1.2 var(--mono);
       letter-spacing: -0.01em;
-      width: 100%;
+      width: auto;
       max-width: 100%;
       min-width: 0;
       text-align: left;
@@ -1414,7 +1449,7 @@
       scrollbar-gutter: stable;
     }
     .scroll-pane.scroll-pane-tall {
-      max-height: 290px; /* ~5 event / issue rows */
+      max-height: 420px;
     }
     .scroll-pane.scroll-pane-drawer {
       max-height: 260px;
@@ -1489,17 +1524,70 @@
       font-size: 12px;
       table-layout: fixed;
     }
-    .issue-table th, .issue-table td {
+    .issue-table th,
+    .issue-table td {
       text-align: left;
-      padding: 10px 8px;
+      padding: 10px 10px;
       border-bottom: 1px solid var(--line);
-      vertical-align: top;
+      vertical-align: middle;
       min-width: 0;
+      overflow: hidden;
     }
-    .issue-table .col-kind { width: 18%; }
-    .issue-table .col-behaviors { width: 34%; }
+    .issue-table .col-kind { width: 20%; }
     .issue-table .col-location { width: 24%; }
-    .issue-table .col-message { width: 24%; }
+    .issue-table .col-behaviors { width: 28%; }
+    .issue-table .col-message { width: 28%; }
+    .issue-table-title {
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .issue-table td .truncate,
+    .issue-table td .path-text {
+      display: block;
+      max-width: 100%;
+    }
+    .issue-table td.col-message .truncate {
+      color: var(--ink-soft);
+      line-height: 1.4;
+    }
+    .issue-rules {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 5px;
+      align-items: center;
+      min-width: 0;
+      overflow: hidden;
+    }
+    .issue-rules.expanded {
+      flex-wrap: wrap;
+      max-height: 96px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding-right: 2px;
+      scrollbar-gutter: stable;
+    }
+    .issue-rules .behavior-chip {
+      flex: 0 1 auto;
+      max-width: 9.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .behavior-more {
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      background: var(--surface-raised);
+      color: var(--muted);
+      border-radius: var(--radius);
+      padding: 4px 7px;
+      font: 500 11px/1.2 var(--mono);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .behavior-more:hover {
+      border-color: var(--line-strong);
+      color: var(--ink-soft);
+    }
     .behavior-chip {
       max-width: 100%;
       overflow: hidden;
@@ -1518,19 +1606,24 @@
       top: 0;
       background: var(--surface);
       z-index: 1;
+      border-bottom: 1px solid var(--line-strong);
+    }
+    .issue-table tbody tr:hover td {
+      background: var(--surface-raised);
     }
     .issue-table .mono { font-family: var(--mono); font-size: 11px; }
-    .issue-table button:not(.behavior-chip) {
-      border: 0;
-      background: transparent;
-      color: var(--accent);
-      cursor: pointer;
-      font: 500 11px var(--mono);
-      padding: 0;
+    .issue-table button.behavior-more {
+      border: 1px solid var(--line);
+      background: var(--surface-raised);
+      color: var(--muted);
+      font: 500 11px/1.2 var(--mono);
+      padding: 4px 7px;
+      text-decoration: none;
     }
-    .issue-table button:not(.behavior-chip):hover {
-      text-decoration: underline;
-      text-underline-offset: 2px;
+    .issue-table button.behavior-more:hover {
+      text-decoration: none;
+      border-color: var(--line-strong);
+      color: var(--ink-soft);
     }
 
     .code-toolbar-path {

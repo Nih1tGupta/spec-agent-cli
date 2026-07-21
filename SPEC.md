@@ -84,7 +84,10 @@ SA-005: A behavior request MUST trigger context discovery, explicit unknowns, an
 scope check before product decisions are proposed.
 
 SA-006: The agent MUST ask one blocking question at a time and MUST compare two or
-three approaches for each material product decision.
+three approaches for each material product decision. Clarification MUST use the Spec
+Agent signature: `Question N:` for each question; `Option 1 (Recommended)` / `Option 2`
+/ `Option 3` for choices; and end choice prompts with
+`Please select one of the following options (1, 2, or 3):` (numbers matching the count).
 
 SA-007: The agent MUST evaluate actors, business rules, conceptual data, flows,
 failures, states, edge cases, permissions, privacy, defaults, constraints, non-goals,
